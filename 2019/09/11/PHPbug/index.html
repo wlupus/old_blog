@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="php,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="FirstBlog终于在自习室搞完了。。。初次尝试hexo,慢慢摸索吧。==zyf sb==yc nbzyf nbyc sb$ \sum_{i=1}^n i^2 $      \begin{aligned}         \vert y_n-A \vert &amp;= \vert \frac{\left(x_1-A \right)+\left(x_2-A\right)+\ldots+\left( x_">
+<meta name="description" content="php审计—从入门到入坟  1.extract()  &amp;gt; extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖  效果: 1234567&amp;lt;?php$a = &quot;a&quot;;$my_array = array(&quot;a&quot; =&amp;gt; &quot;Cat&quot;,&quot;b&quot; =&amp;gt; &quot;Dog">
+<meta name="keywords" content="php">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FirstBlog">
-<meta property="og:url" content="http://wlupus.github.io/2019/09/11/FirstBlog/index.html">
+<meta property="og:title" content="PHP漏洞总结">
+<meta property="og:url" content="http://wlupus.github.io/2019/09/11/PHPbug/index.html">
 <meta property="og:site_name" content="wlupus">
-<meta property="og:description" content="FirstBlog终于在自习室搞完了。。。初次尝试hexo,慢慢摸索吧。==zyf sb==yc nbzyf nbyc sb$ \sum_{i=1}^n i^2 $      \begin{aligned}         \vert y_n-A \vert &amp;= \vert \frac{\left(x_1-A \right)+\left(x_2-A\right)+\ldots+\left( x_">
+<meta property="og:description" content="php审计—从入门到入坟  1.extract()  &amp;gt; extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖  效果: 1234567&amp;lt;?php$a = &quot;a&quot;;$my_array = array(&quot;a&quot; =&amp;gt; &quot;Cat&quot;,&quot;b&quot; =&amp;gt; &quot;Dog">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T14:06:52.041Z">
+<meta property="og:updated_time" content="2019-09-11T15:05:34.307Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FirstBlog">
-<meta name="twitter:description" content="FirstBlog终于在自习室搞完了。。。初次尝试hexo,慢慢摸索吧。==zyf sb==yc nbzyf nbyc sb$ \sum_{i=1}^n i^2 $      \begin{aligned}         \vert y_n-A \vert &amp;= \vert \frac{\left(x_1-A \right)+\left(x_2-A\right)+\ldots+\left( x_">
+<meta name="twitter:title" content="PHP漏洞总结">
+<meta name="twitter:description" content="php审计—从入门到入坟  1.extract()  &amp;gt; extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖  效果: 1234567&amp;lt;?php$a = &quot;a&quot;;$my_array = array(&quot;a&quot; =&amp;gt; &quot;Cat&quot;,&quot;b&quot; =&amp;gt; &quot;Dog">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://wlupus.github.io/2019/09/11/FirstBlog/">
+  <link rel="canonical" href="http://wlupus.github.io/2019/09/11/PHPbug/">
 
 
 
 
 
-  <title>FirstBlog | wlupus</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>PHP漏洞总结 | wlupus</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -232,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wlupus.github.io/2019/09/11/FirstBlog/">
+    <link itemprop="mainEntityOfPage" href="http://wlupus.github.io/2019/09/11/PHPbug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wlupus">
@@ -249,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">FirstBlog</h1>
+          <h1 class="post-title" itemprop="name headline">PHP漏洞总结</h1>
         
 
         <div class="post-meta">
@@ -261,7 +262,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-11T19:27:24+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-11T22:40:26+08:00">
                 2019-09-11
               </time>
             
@@ -299,15 +300,32 @@
       
 
       
-        <h1 id="FirstBlog"><a href="#FirstBlog" class="headerlink" title="FirstBlog"></a>FirstBlog</h1><p>终于在自习室搞完了。。。<br>初次尝试hexo,慢慢摸索吧。<br>==zyf sb==<br><strong>yc nb</strong><br><em>zyf nb</em><br><del>yc sb</del><br>$ \sum_{i=1}^n i^2 $</p>
-<script type="math/tex; mode=display">
-    \begin{aligned}
-        \vert y_n-A \vert &= \vert \frac{\left(x_1-A \right)+\left(x_2-A\right)+\ldots+\left( x_n-A \right)}{n} \vert \\
-        &= \vert \frac{\left(x_1-A \right)+\left(x_2-A\right)+\ldots+\left(x_{N_0}-A\right)+\left(x_{N_0+1}-A\right)+\ldots+\left( x_n-A \right)}{n} \vert \\
-        &\le |\frac{\left(x_1-A\right)+(x_2-A)+\ldots+(x_{N_0}-A)}{n}|+\frac{n-N_0}{n}\cdot\frac{\epsilon}{2} \\
-        &\lt|\frac{(x_1-A)+(x_2-A)+\ldots+(x_{N_0}-A)}{n}|+\frac{\epsilon}{2}
-    \end{aligned}</script><p><del>来自WHU高数P20</del></p>
+        <h1 id="php审计—从入门到入坟"><a href="#php审计—从入门到入坟" class="headerlink" title=" php审计—从入门到入坟 "></a><font size="20"> php审计—从入门到入坟 </font></h1><font size="4">
+1.extract()
 
+> extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖
+
+效果:
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="string">"a"</span>;</span><br><span class="line">$my_array = <span class="keyword">array</span>(<span class="string">"a"</span> =&gt; <span class="string">"Cat"</span>,<span class="string">"b"</span> =&gt; <span class="string">"Dog"</span>, <span class="string">"c"</span> =&gt; <span class="string">"Horse"</span>);</span><br><span class="line">extract($my_array);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\$a = $a; \$b = $b; \$c = $c"</span>;</span><br><span class="line"><span class="comment">//$a=Cat $b=Dog $c=Horse</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<font color="red">通过变量覆盖解决问题。</font>
+
+<p>2.strcmp() </p>
+<blockquote>
+<p>在php5.3版本前，如果参数中传入非字符串内容，则直接return 0</p>
+</blockquote>
+<font color="red">伪造字符串相等</font>
+
+<p>3.md5()</p>
+<blockquote>
+<p>若要求md5值弱相等，则可构造哈希值为0E开头的字符串，此时直接视作为0。如果是强相等，则构造数组，此时返回NULL<br>常见构造字符串:<br>    QNKCDZO<br>    240610708<br>    s878926199a<br>    s155964671a<br>    s214587387a<br>    s214587387a</p>
+</blockquote>
+<p><font color="red">注意是强相等还是弱相等</font><br>4.ereg()</p>
+<blockquote>
+<p>ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false。搜索字母的字符是大小写敏感的。<br>如果参数为数组则返回NULL，遇到%00截断</p>
+</blockquote>
+<p>待续</p>
+</font>
       
     </div>
     
@@ -322,6 +340,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+        </div>
+      
 
       
       
@@ -331,8 +355,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/09/11/FirstBlog/" rel="next" title="FirstBlog">
+                <i class="fa fa-chevron-left"></i> FirstBlog
               </a>
             
           </div>
@@ -340,10 +364,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/11/PHPbug/" rel="prev" title="PHP漏洞总结">
-                PHP漏洞总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -466,7 +486,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FirstBlog"><span class="nav-number">1.</span> <span class="nav-text">FirstBlog</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#php审计—从入门到入坟"><span class="nav-number">1.</span> <span class="nav-text"> php审计—从入门到入坟 </span></a></li></ol></div>
             
 
           </div>
@@ -620,7 +640,24 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
@@ -673,43 +710,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 

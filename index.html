@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="ctf">
+<meta name="description" content="Waiting for a light that never comes">
 <meta property="og:type" content="website">
 <meta property="og:title" content="wlupus">
 <meta property="og:url" content="http://wlupus.github.io/index.html">
 <meta property="og:site_name" content="wlupus">
-<meta property="og:description" content="ctf">
+<meta property="og:description" content="Waiting for a light that never comes">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wlupus">
-<meta name="twitter:description" content="ctf">
+<meta name="twitter:description" content="Waiting for a light that never comes">
 
 
 
@@ -218,6 +218,150 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wlupus.github.io/2019/09/11/PHPbug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wlupus">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlupus">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/11/PHPbug/" itemprop="url">PHP漏洞总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-11T22:40:26+08:00">
+                2019-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="php审计—从入门到入坟"><a href="#php审计—从入门到入坟" class="headerlink" title=" php审计—从入门到入坟 "></a><font size="20"> php审计—从入门到入坟 </font></h1><font size="4">
+1.extract()
+
+> extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖
+
+效果:
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="string">"a"</span>;</span><br><span class="line">$my_array = <span class="keyword">array</span>(<span class="string">"a"</span> =&gt; <span class="string">"Cat"</span>,<span class="string">"b"</span> =&gt; <span class="string">"Dog"</span>, <span class="string">"c"</span> =&gt; <span class="string">"Horse"</span>);</span><br><span class="line">extract($my_array);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\$a = $a; \$b = $b; \$c = $c"</span>;</span><br><span class="line"><span class="comment">//$a=Cat $b=Dog $c=Horse</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<font color="red">通过变量覆盖解决问题。</font>
+
+<p>2.strcmp() </p>
+<blockquote>
+<p>在php5.3版本前，如果参数中传入非字符串内容，则直接return 0</p>
+</blockquote>
+<font color="red">伪造字符串相等</font>
+
+<p>3.md5()</p>
+<blockquote>
+<p>若要求md5值弱相等，则可构造哈希值为0E开头的字符串，此时直接视作为0。如果是强相等，则构造数组，此时返回NULL<br>常见构造字符串:<br>    QNKCDZO<br>    240610708<br>    s878926199a<br>    s155964671a<br>    s214587387a<br>    s214587387a</p>
+</blockquote>
+<p><font color="red">注意是强相等还是弱相等</font><br>4.ereg()</p>
+<blockquote>
+<p>ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false。搜索字母的字符是大小写敏感的。<br>如果参数为数组则返回NULL，遇到%00截断</p>
+</blockquote>
+<p>待续</p>
+</font>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -510,7 +654,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">wlupus</p>
-              <p class="site-description motion-element" itemprop="description">ctf</p>
+              <p class="site-description motion-element" itemprop="description">Waiting for a light that never comes</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -520,7 +664,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -528,6 +672,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>
