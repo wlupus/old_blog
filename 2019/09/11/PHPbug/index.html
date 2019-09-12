@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="php审计—从入门到入坟  1.extract()  &amp;gt; extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖  效果: 1234567&amp;lt;?php$a = &quot;a&quot;;$my_array = array(&quot;a&quot; =&amp;gt; &quot;Cat&quot;,&quot;b&quot; =&amp;gt; &quot;Dog">
+<meta name="description" content="php审计—从入门到入坟  extract() extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖  效果:1234567&amp;lt;?php$a = &quot;a&quot;;$my_array = array(&quot;a&quot; =&amp;gt; &quot;Cat&quot;,&quot;b&quot; =&amp;gt; &quot;Dog&quot;, &quot;c&quot;">
 <meta name="keywords" content="php">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP漏洞总结">
 <meta property="og:url" content="http://wlupus.github.io/2019/09/11/PHPbug/index.html">
 <meta property="og:site_name" content="wlupus">
-<meta property="og:description" content="php审计—从入门到入坟  1.extract()  &amp;gt; extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖  效果: 1234567&amp;lt;?php$a = &quot;a&quot;;$my_array = array(&quot;a&quot; =&amp;gt; &quot;Cat&quot;,&quot;b&quot; =&amp;gt; &quot;Dog">
+<meta property="og:description" content="php审计—从入门到入坟  extract() extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖  效果:1234567&amp;lt;?php$a = &quot;a&quot;;$my_array = array(&quot;a&quot; =&amp;gt; &quot;Cat&quot;,&quot;b&quot; =&amp;gt; &quot;Dog&quot;, &quot;c&quot;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T15:05:34.307Z">
+<meta property="og:updated_time" content="2019-09-12T04:54:08.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP漏洞总结">
-<meta name="twitter:description" content="php审计—从入门到入坟  1.extract()  &amp;gt; extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖  效果: 1234567&amp;lt;?php$a = &quot;a&quot;;$my_array = array(&quot;a&quot; =&amp;gt; &quot;Cat&quot;,&quot;b&quot; =&amp;gt; &quot;Dog">
+<meta name="twitter:description" content="php审计—从入门到入坟  extract() extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖  效果:1234567&amp;lt;?php$a = &quot;a&quot;;$my_array = array(&quot;a&quot; =&amp;gt; &quot;Cat&quot;,&quot;b&quot; =&amp;gt; &quot;Dog&quot;, &quot;c&quot;">
 
 
 
@@ -300,32 +300,39 @@
       
 
       
-        <h1 id="php审计—从入门到入坟"><a href="#php审计—从入门到入坟" class="headerlink" title=" php审计—从入门到入坟 "></a><font size="20"> php审计—从入门到入坟 </font></h1><font size="4">
-1.extract()
-
-> extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖
-
-效果:
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="string">"a"</span>;</span><br><span class="line">$my_array = <span class="keyword">array</span>(<span class="string">"a"</span> =&gt; <span class="string">"Cat"</span>,<span class="string">"b"</span> =&gt; <span class="string">"Dog"</span>, <span class="string">"c"</span> =&gt; <span class="string">"Horse"</span>);</span><br><span class="line">extract($my_array);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\$a = $a; \$b = $b; \$c = $c"</span>;</span><br><span class="line"><span class="comment">//$a=Cat $b=Dog $c=Horse</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
+        <p><strong><font size="20"> php审计—从入门到入坟 </font></strong></p>
+<h1 id="extract"><a href="#extract" class="headerlink" title="extract()"></a>extract()</h1><blockquote>
+<p>extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖</p>
+</blockquote>
+<p>效果:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="string">"a"</span>;</span><br><span class="line">$my_array = <span class="keyword">array</span>(<span class="string">"a"</span> =&gt; <span class="string">"Cat"</span>,<span class="string">"b"</span> =&gt; <span class="string">"Dog"</span>, <span class="string">"c"</span> =&gt; <span class="string">"Horse"</span>);</span><br><span class="line">extract($my_array);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\$a = $a; \$b = $b; \$c = $c"</span>;</span><br><span class="line"><span class="comment">//$a=Cat $b=Dog $c=Horse</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
 <font color="red">通过变量覆盖解决问题。</font>
 
-<p>2.strcmp() </p>
-<blockquote>
+<h1 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp()"></a>strcmp()</h1><blockquote>
 <p>在php5.3版本前，如果参数中传入非字符串内容，则直接return 0</p>
 </blockquote>
 <font color="red">伪造字符串相等</font>
 
-<p>3.md5()</p>
-<blockquote>
+<h1 id="md5"><a href="#md5" class="headerlink" title="md5()"></a>md5()</h1><blockquote>
 <p>若要求md5值弱相等，则可构造哈希值为0E开头的字符串，此时直接视作为0。如果是强相等，则构造数组，此时返回NULL<br>常见构造字符串:<br>    QNKCDZO<br>    240610708<br>    s878926199a<br>    s155964671a<br>    s214587387a<br>    s214587387a</p>
 </blockquote>
-<p><font color="red">注意是强相等还是弱相等</font><br>4.ereg()</p>
-<blockquote>
+<font color="red">注意是强相等还是弱相等</font>
+
+<h1 id="ereg"><a href="#ereg" class="headerlink" title="ereg()"></a>ereg()</h1><blockquote>
 <p>ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false。搜索字母的字符是大小写敏感的。<br>如果参数为数组则返回NULL，遇到%00截断</p>
 </blockquote>
+<h1 id="strpos"><a href="#strpos" class="headerlink" title="strpos()"></a>strpos()</h1><blockquote>
+<p>寻找表达式出现的第一个位置,如果参数为数组返回NULL</p>
+</blockquote>
+<font color="red">注意如果下标为0等价false</font>
+
+<h1 id="is-numric"><a href="#is-numric" class="headerlink" title="is_numric()"></a>is_numric()</h1><blockquote>
+<p>is_numric用于判断是否为纯数字，遇到%00直接判定为非数字，无关%00位置</p>
+</blockquote>
+<h2 id="ps-关于-00"><a href="#ps-关于-00" class="headerlink" title="ps:关于%00"></a>ps:关于%00</h2><blockquote>
+<p>%00是字符串的结尾，然而输出时遇到%00<font color="red">不停止</font>。$_GET数组得到的是字符串，当出现 (string)1%00==1等类似语句时，会将string<font color="red">转换为数字</font>，并且<font color="red">遇到%00停止</font>。如果字符串无法转换为数字，<font color="red">就视作0</font>。</p>
+</blockquote>
 <p>待续</p>
-</font>
+
       
     </div>
     
@@ -364,6 +371,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/12/ctf工具总结/" rel="prev" title="ctf工具总结">
+                ctf工具总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -453,7 +464,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -486,7 +497,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#php审计—从入门到入坟"><span class="nav-number">1.</span> <span class="nav-text"> php审计—从入门到入坟 </span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#extract"><span class="nav-number">1.</span> <span class="nav-text">extract()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#strcmp"><span class="nav-number">2.</span> <span class="nav-text">strcmp()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#md5"><span class="nav-number">3.</span> <span class="nav-text">md5()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ereg"><span class="nav-number">4.</span> <span class="nav-text">ereg()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#strpos"><span class="nav-number">5.</span> <span class="nav-text">strpos()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#is-numric"><span class="nav-number">6.</span> <span class="nav-text">is_numric()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ps-关于-00"><span class="nav-number">6.1.</span> <span class="nav-text">ps:关于%00</span></a></li></ol></li></ol></div>
             
 
           </div>
