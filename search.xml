@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[ctf工具总结]]></title>
+    <url>%2F2019%2F09%2F12%2Fctf%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[1.ZipCenOp.jar用于判断压缩包是否为伪加密 指令:java -jar ZipCenOp.jar r xxx.zip decodejava -jar ZipCenOp.jar e xxx.zip encode 待续]]></content>
+      <tags>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[PHP漏洞总结]]></title>
+    <url>%2F2019%2F09%2F11%2FPHPbug%2F</url>
+    <content type="text"><![CDATA[php审计—从入门到入坟 extract() extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖 效果:1234567&lt;?php$a = "a";$my_array = array("a" =&gt; "Cat","b" =&gt; "Dog", "c" =&gt; "Horse");extract($my_array);echo "\$a = $a; \$b = $b; \$c = $c";//$a=Cat $b=Dog $c=Horse?&gt; 通过变量覆盖解决问题。 strcmp() 在php5.3版本前，如果参数中传入非字符串内容，则直接return 0 伪造字符串相等 md5() 若要求md5值弱相等，则可构造哈希值为0E开头的字符串，此时直接视作为0。如果是强相等，则构造数组，此时返回NULL常见构造字符串: QNKCDZO 240610708 s878926199a s155964671a s214587387a s214587387a 注意是强相等还是弱相等 ereg() ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false。搜索字母的字符是大小写敏感的。如果参数为数组则返回NULL，遇到%00截断 strpos() 寻找表达式出现的第一个位置,如果参数为数组返回NULL 注意如果下标为0等价false is_numric() is_numric用于判断是否为纯数字，遇到%00直接判定为非数字，无关%00位置 ps:关于%00 %00是字符串的结尾，然而输出时遇到%00不停止。$_GET数组得到的是字符串，当出现 (string)1%00==1等类似语句时，会将string转换为数字，并且遇到%00停止。如果字符串无法转换为数字，就视作0。 待续]]></content>
+      <tags>
+        <tag>php</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[FirstBlog]]></title>
+    <url>%2F2019%2F09%2F11%2FFirstBlog%2F</url>
+    <content type="text"><![CDATA[FirstBlog终于在自习室搞完了。。。初次尝试hexo,慢慢摸索吧。==zyf sb==yc nbzyf nbyc sb$ \sum_{i=1}^n i^2 $ \begin{aligned} \vert y_n-A \vert &= \vert \frac{\left(x_1-A \right)+\left(x_2-A\right)+\ldots+\left( x_n-A \right)}{n} \vert \\ &= \vert \frac{\left(x_1-A \right)+\left(x_2-A\right)+\ldots+\left(x_{N_0}-A\right)+\left(x_{N_0+1}-A\right)+\ldots+\left( x_n-A \right)}{n} \vert \\ &\le |\frac{\left(x_1-A\right)+(x_2-A)+\ldots+(x_{N_0}-A)}{n}|+\frac{n-N_0}{n}\cdot\frac{\epsilon}{2} \\ &\lt|\frac{(x_1-A)+(x_2-A)+\ldots+(x_{N_0}-A)}{n}|+\frac{\epsilon}{2} \end{aligned}来自WHU高数P20]]></content>
+  </entry>
+</search>
