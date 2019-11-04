@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,">
+  <meta name="keywords" content="Django,uwsgi,nginx,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="好久没有写博客了，总结一下python写程序时遇到的知识点和问题。 base64库base64.b64encode(string)接受参数string应为byte型，str类型需转换，如string.encode(‘utf-8’) base64.b64decode(string)同上，字符串应为byte型，注意可加参数validate,true表示遇到非法字符抛出异常，false表示遇到非法字符忽">
-<meta name="keywords" content="python">
+<meta name="description" content="Django环境搭建以下基于Python3和Django2.2版本,对低版本不具有参考性 0x00 配置虚拟环境1pip3 install virtualenv virtualenvwrapper 之后修改环境变量(如.bashrc),加入 1234export WORKON_HOME=$HOME/.virtualenvsexport PROJECT_HOME=$HOME/workspaceexp">
+<meta name="keywords" content="Django,uwsgi,nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python">
-<meta property="og:url" content="http://wlupus.github.io/2019/09/21/python总结/index.html">
+<meta property="og:title" content="django部署">
+<meta property="og:url" content="http://wlupus.github.io/2019/10/30/djangoenv/index.html">
 <meta property="og:site_name" content="wlupus">
-<meta property="og:description" content="好久没有写博客了，总结一下python写程序时遇到的知识点和问题。 base64库base64.b64encode(string)接受参数string应为byte型，str类型需转换，如string.encode(‘utf-8’) base64.b64decode(string)同上，字符串应为byte型，注意可加参数validate,true表示遇到非法字符抛出异常，false表示遇到非法字符忽">
+<meta property="og:description" content="Django环境搭建以下基于Python3和Django2.2版本,对低版本不具有参考性 0x00 配置虚拟环境1pip3 install virtualenv virtualenvwrapper 之后修改环境变量(如.bashrc),加入 1234export WORKON_HOME=$HOME/.virtualenvsexport PROJECT_HOME=$HOME/workspaceexp">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-27T08:26:11.779Z">
+<meta property="og:updated_time" content="2019-11-04T01:29:16.176Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python">
-<meta name="twitter:description" content="好久没有写博客了，总结一下python写程序时遇到的知识点和问题。 base64库base64.b64encode(string)接受参数string应为byte型，str类型需转换，如string.encode(‘utf-8’) base64.b64decode(string)同上，字符串应为byte型，注意可加参数validate,true表示遇到非法字符抛出异常，false表示遇到非法字符忽">
+<meta name="twitter:title" content="django部署">
+<meta name="twitter:description" content="Django环境搭建以下基于Python3和Django2.2版本,对低版本不具有参考性 0x00 配置虚拟环境1pip3 install virtualenv virtualenvwrapper 之后修改环境变量(如.bashrc),加入 1234export WORKON_HOME=$HOME/.virtualenvsexport PROJECT_HOME=$HOME/workspaceexp">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://wlupus.github.io/2019/09/21/python总结/">
+  <link rel="canonical" href="http://wlupus.github.io/2019/10/30/djangoenv/">
 
 
 
 
 
-  <title>python | wlupus</title>
+  <title>django部署 | wlupus</title>
   
 
 
@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wlupus.github.io/2019/09/21/python总结/">
+    <link itemprop="mainEntityOfPage" href="http://wlupus.github.io/2019/10/30/djangoenv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wlupus">
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python</h1>
+          <h1 class="post-title" itemprop="name headline">django部署</h1>
         
 
         <div class="post-meta">
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-21T16:08:48+08:00">
-                2019-09-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-30T20:07:50+08:00">
+                2019-10-30
               </time>
             
 
@@ -394,59 +394,54 @@
       
 
       
-        <p>好久没有写博客了，总结一下python写程序时遇到的知识点和问题。</p>
-<h1 id="base64库"><a href="#base64库" class="headerlink" title="base64库"></a>base64库</h1><h2 id="base64-b64encode-string"><a href="#base64-b64encode-string" class="headerlink" title="base64.b64encode(string)"></a>base64.b64encode(string)</h2><p>接受参数string应为byte型，str类型需转换，如string.encode(‘utf-8’)</p>
-<h2 id="base64-b64decode-string"><a href="#base64-b64decode-string" class="headerlink" title="base64.b64decode(string)"></a>base64.b64decode(string)</h2><p>同上，字符串应为byte型，注意可加参数validate,true表示遇到非法字符抛出异常，false表示遇到非法字符忽略，默认false。如base64.b64decode(s,validate=True)<br>注意binascii.Error是在base64命名空间下，所以except要写成except base64.binascii.Error</p>
-<blockquote>
-<p>常见异常：<br>UnicodeEncodeError<br>base64.binascii.Error</p>
-</blockquote>
-<h1 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h1><h2 id="split"><a href="#split" class="headerlink" title="split()"></a>split()</h2><p>s.split(‘char’)返回一个数组，为以char分割后的各个字符串。可选参数：指定分割次数，默认为-1，即分割所有。如s.split(‘char’,1)</p>
-<h2 id="strip"><a href="#strip" class="headerlink" title="strip()"></a>strip()</h2><p>用于除去字符串两端的字符<br>s.strip()表示除去两端的空格<br>s.strip(‘1’)即除去字符串两端的’1’</p>
-<h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p>注意左开右闭<br>s[1:-1]不包含最后一个字符，s[-1]为提取最后一个字符</p>
-<blockquote>
-<p>常见异常<br>IndexError</p>
-</blockquote>
-<h1 id="图片处理"><a href="#图片处理" class="headerlink" title="图片处理"></a>图片处理</h1><p>注意调库<br>Image在PIL里，所以写成from PIL import Image</p>
-<h2 id="Image-open"><a href="#Image-open" class="headerlink" title="Image.open()"></a>Image.open()</h2><p>返回一个pil里的img类型，写的时候注意参数的类型变化</p>
-<h2 id="获取图片的宽高"><a href="#获取图片的宽高" class="headerlink" title="获取图片的宽高"></a>获取图片的宽高</h2><p>对一个上述Image.open()返回值类型的变量，可以用.size方法，如<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">width,height=tmp.size</span><br></pre></td></tr></table></figure></p>
-<h2 id="图片原比例缩放"><a href="#图片原比例缩放" class="headerlink" title="图片原比例缩放"></a>图片原比例缩放</h2><p>当时写qrcode制作的时候，因为文本量太大，所以生成的qrcode过大，此时将图片缩放应该是比设计滚动条更好的选(<del>其实是我不会给Label加滚动条</del>)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resize</span><span class="params">(w,h,nw,nh,img)</span>:</span></span><br><span class="line">	a=<span class="number">1.0</span>*nw/w <span class="comment">#用1.0是为了强制转化为浮点数运算</span></span><br><span class="line">	b=<span class="number">1.0</span>*nh/h</span><br><span class="line">	div=min(a,b)</span><br><span class="line">	fw=int(w*div)</span><br><span class="line">	fh=int(h*div)</span><br><span class="line">	<span class="keyword">return</span> img.resize((fw,fh),Image.ANTIALIAS)</span><br></pre></td></tr></table></figure></p>
-<p>img类型应为Image.open()的返回值类型<br>Image.ANTIALIAS高质量<br>Image.NEAREST低质量</p>
-<h1 id="os库"><a href="#os库" class="headerlink" title="os库"></a>os库</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.system(order)</span><br></pre></td></tr></table></figure>
-<p>order即控制台运行的指令<br>注意，如果要在A程序里打开B,最好新建一个控制台，即<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.system(start python b.py)</span><br></pre></td></tr></table></figure></p>
-<p>因为这样直接关闭B程序不会导致A程序接受不到B程序执行结束的反馈而崩溃。(<del>貌似我因为这样写弄崩了评测学长的命令行</del>)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.getcwd()</span><br></pre></td></tr></table></figure></p>
-<p>这个可以获取当前的py文件所在路径</p>
-<h1 id="GUI学习"><a href="#GUI学习" class="headerlink" title="GUI学习"></a>GUI学习</h1><p>GUI真是个大坑啊，尤其是库里出了问题，全凭google救命</p>
-<h2 id="tkinter"><a href="#tkinter" class="headerlink" title="tkinter"></a>tkinter</h2><p>第一次写GUI用的就是这个库，大概优点是python里自带，不用额外安装库，操作简单。不过界面挺简陋的(<del>俺的第一次GUI被说界面丑</del>)<br>PS:python3 里 写作tkinter，老版本写作Tkinter</p>
-<h3 id="Tk"><a href="#Tk" class="headerlink" title="Tk()"></a>Tk()</h3><p>创建一个窗口，如<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root=Tk()</span><br></pre></td></tr></table></figure></p>
-<h3 id="title"><a href="#title" class="headerlink" title="title"></a>title</h3><p>title就是打开的窗口左上角显示的文字<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root.title(<span class="string">'I love python'</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="Button控件"><a href="#Button控件" class="headerlink" title="Button控件"></a>Button控件</h3><p>新建一个按钮控件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Button(root,text=<span class="string">''</span>,command=click,height=h,width=w,activeforeground=<span class="string">'color'</span>)</span><br></pre></td></tr></table></figure></p>
-<p>master是按钮控件要加入的窗口，text为按钮显示的文本，command为按钮点击时触发的函数，width,height为按钮的宽高activeforeground为点击时的前景色。</p>
-<h3 id="Label控件"><a href="#Label控件" class="headerlink" title="Label控件"></a>Label控件</h3><p>新建一个用户不可选中的显示区，可以用来显示图片和文字</p>
-<h4 id="显示文字"><a href="#显示文字" class="headerlink" title="显示文字"></a>显示文字</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Label(root,text)</span><br></pre></td></tr></table></figure>
-<p>含义同上</p>
-<h4 id="显示图片"><a href="#显示图片" class="headerlink" title="显示图片"></a>显示图片</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">img=ImageTk.PhotoImage(Image.open(path))</span><br><span class="line">Label(image=img)</span><br></pre></td></tr></table></figure>
-<p>ImageTk,Image在PIL库里<br>Label会根据图片的大小自动改变大小</p>
-<h3 id="Text控件"><a href="#Text控件" class="headerlink" title="Text控件"></a>Text控件</h3><p>新建一个可以被用户选中的显示文本或图片的控件<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e1=Text(root,height=a,width=b)</span><br></pre></td></tr></table></figure></p>
-<p>参数含义同上</p>
-<h4 id="获取Text内的文字"><a href="#获取Text内的文字" class="headerlink" title="获取Text内的文字"></a>获取Text内的文字</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e1.get(<span class="number">0.0</span>,END)</span><br></pre></td></tr></table></figure>
-<p>第一个参数是开始的(行.列)第二个参数同理，可以用END来替代结尾</p>
-<font color="red">注意Text会在文本最后额外添加一个换行符</font>
-
-<h4 id="Text文本内容的修改"><a href="#Text文本内容的修改" class="headerlink" title="Text文本内容的修改"></a>Text文本内容的修改</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">e1.delete(<span class="number">0.0</span>,END)</span><br><span class="line">e1.insert(<span class="number">0.0</span>,s)</span><br></pre></td></tr></table></figure>
-<p>insert参数中第一项为插入位置，第二项为插入的字符串</p>
-<h3 id="动态修改"><a href="#动态修改" class="headerlink" title="动态修改"></a>动态修改</h3><p>Label,Button都是可以动态修改的<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A.config(a=b)</span><br></pre></td></tr></table></figure></p>
-<p>config里是需要修改的参数<br>这里有个坑,在Label动态修改图片时，要这样写<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imglabel.config(image=img)</span><br><span class="line">imglabel.image=img</span><br></pre></td></tr></table></figure></p>
-<p>如果少写第二行，就会出现虽然Label已经根据图片调整了大小，但是还是无法显示图片的bug。这个bug好像是因为库里有的引用忘记修改了，大概是库函数的锅。。。</p>
-<h3 id="tkinter布局管理"><a href="#tkinter布局管理" class="headerlink" title="tkinter布局管理"></a>tkinter布局管理</h3><h4 id="pack"><a href="#pack" class="headerlink" title="pack()"></a>pack()</h4><p>这个比较简单，就是自动排布，默认累成一列，可再加参数更改排布方式<br>如:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A.pack()</span><br></pre></td></tr></table></figure></p>
-<h4 id="grid"><a href="#grid" class="headerlink" title="grid()"></a>grid()</h4><p>grid可以略微精准一点来控制布局，它将界面分成小格，row表示行数，column表示列数，可以增加sticky参数来确定在单独一个格里的分布<br>如:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.grid(row=<span class="number">1</span>,column=<span class="number">1</span>,sticky=W)</span><br></pre></td></tr></table></figure></p>
-<p><font color="red">注意pack和grid不能混合使用，只能二者取一</font></p>
-<h3 id="增加滚动条"><a href="#增加滚动条" class="headerlink" title="增加滚动条"></a>增加滚动条</h3><p>目前还只会给Text增加垂直滚动条<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">e1=Text(root,height=<span class="number">15</span>,width=<span class="number">100</span>)</span><br><span class="line">S=Scrollbar(root)</span><br><span class="line">S.grid(row=<span class="number">0</span>,column=<span class="number">1</span>,sticky=E,ipady=<span class="number">70</span>)</span><br><span class="line">e1.grid(row=<span class="number">0</span>,column=<span class="number">1</span>,sticky=W,padx=<span class="number">20</span>)</span><br><span class="line">S.config(command=e1.yview)</span><br><span class="line">e1.config(yscrollcommand=S.set)</span><br></pre></td></tr></table></figure></p>
-<h3 id="打开文件选取框"><a href="#打开文件选取框" class="headerlink" title="打开文件选取框"></a>打开文件选取框</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter.filedialog</span><br><span class="line">filepath=tkinter.filedialog.askopenfilename()</span><br></pre></td></tr></table></figure>
-<p>filepath是带着当前文件的全名的(包括扩展名)</p>
-<h3 id="运行窗口"><a href="#运行窗口" class="headerlink" title="运行窗口"></a>运行窗口</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root.mainloop()</span><br></pre></td></tr></table></figure>
-<h1 id="识别文件的编码格式并打开"><a href="#识别文件的编码格式并打开" class="headerlink" title="识别文件的编码格式并打开"></a>识别文件的编码格式并打开</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> chardet</span><br><span class="line"><span class="keyword">with</span> open(filepath,<span class="string">'rb'</span>) <span class="keyword">as</span> tf:</span><br><span class="line">	nowencode=chardet.detect(tf.read())[<span class="string">'encoding'</span>]</span><br><span class="line"><span class="keyword">with</span> open(filepath,encoding=nowencode) <span class="keyword">as</span> f:</span><br><span class="line">	s=f.read()</span><br></pre></td></tr></table></figure>
-<p>这样防止乱码问题</p>
-<p>待续</p>
+        <h1 id="Django环境搭建"><a href="#Django环境搭建" class="headerlink" title="Django环境搭建"></a>Django环境搭建</h1><p>以下基于Python3和Django2.2版本,对低版本不具有参考性</p>
+<h2 id="0x00-配置虚拟环境"><a href="#0x00-配置虚拟环境" class="headerlink" title="0x00 配置虚拟环境"></a>0x00 配置虚拟环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv virtualenvwrapper</span><br></pre></td></tr></table></figure>
+<p>之后修改环境变量(如.bashrc),加入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> WORKON_HOME=<span class="variable">$HOME</span>/.virtualenvs</span><br><span class="line"><span class="built_in">export</span> PROJECT_HOME=<span class="variable">$HOME</span>/workspace</span><br><span class="line"><span class="built_in">export</span> VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3</span><br><span class="line"><span class="built_in">source</span> /usr/<span class="built_in">local</span>/bin/virtualenvwrapper.sh</span><br></pre></td></tr></table></figure>
+<p>修改后重新加载环境变量文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<h3 id="虚拟环境相关指令"><a href="#虚拟环境相关指令" class="headerlink" title="虚拟环境相关指令"></a>虚拟环境相关指令</h3><p><span style="color:red;">mkvirtualenv</span> env3 创建新环境env3</p>
+<p><span style="color:red;">mkvirtualenv</span> env3  —python=python3(.x) 创建python3版本的环境</p>
+<p><span style="color:red;">workon</span> env3 使用env3环境</p>
+<p><span style="color:red;">deactivate</span> 退出env3环境</p>
+<p><span style="color:red;">rmvirtualenv</span> env3 删除env3</p>
+<p><span style="color:red;">mkproject</span> mine 创建mine项目和mine环境</p>
+<p><span style="color:red;">lsvirtualenv</span> 列出可用虚拟环境</p>
+<p><span style="color:red;">lssitepackages</span> 列出当前环境安装的包</p>
+<h2 id="0x01-安装Django"><a href="#0x01-安装Django" class="headerlink" title="0x01 安装Django"></a>0x01 安装Django</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install Django</span><br></pre></td></tr></table></figure>
+<p>测试安装是否成功:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> django</span><br><span class="line">django.get_version()</span><br></pre></td></tr></table></figure>
+<p>输出版本号即安装完成</p>
+<h2 id="0x02-新建Django项目"><a href="#0x02-新建Django项目" class="headerlink" title="0x02 新建Django项目"></a>0x02 新建Django项目</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject myproject</span><br></pre></td></tr></table></figure>
+<p>或者写django-admin.py 项目名称应为Python合法包名</p>
+<h2 id="0x03-新建app"><a href="#0x03-新建app" class="headerlink" title="0x03 新建app"></a>0x03 新建app</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> myproject</span><br><span class="line">python manage.py startapp myapp</span><br></pre></td></tr></table></figure>
+<h2 id="0x04-运行开发服务器"><a href="#0x04-运行开发服务器" class="headerlink" title="0x04 运行开发服务器"></a>0x04 运行开发服务器</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
+<h2 id="0x05-静态文件"><a href="#0x05-静态文件" class="headerlink" title="0x05 静态文件"></a>0x05 静态文件</h2><p>静态文件是指js,css,图片等文件</p>
+<p>首先,打开settings.py,添加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Static files (CSS, JavaScript, Images)</span></span><br><span class="line"><span class="comment"># https://docs.djangoproject.com/en/1.8/howto/static-files/</span></span><br><span class="line"> </span><br><span class="line">STATIC_URL = <span class="string">'/static/'</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 当运行 python manage.py collectstatic 的时候</span></span><br><span class="line"><span class="comment"># STATIC_ROOT 文件夹 是用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来</span></span><br><span class="line"><span class="comment"># 把这些文件放到一起是为了用apache等部署的时候更方便</span></span><br><span class="line">STATIC_ROOT = os.path.join(BASE_DIR, <span class="string">'collected_static'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 其它 存放静态文件的文件夹，可以用来存放项目中公用的静态文件，里面不能包含 STATIC_ROOT</span></span><br><span class="line"><span class="comment"># 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以</span></span><br><span class="line">STATICFILES_DIRS = (</span><br><span class="line">    os.path.join(BASE_DIR, <span class="string">"common_static"</span>),</span><br><span class="line">    <span class="string">'/path/to/others/static/'</span>,  <span class="comment"># 用不到的时候可以不写这一行</span></span><br><span class="line">)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 这个是默认设置，Django 默认会在 STATICFILES_DIRS中的文件夹 和 各app下的static文件夹中找文件</span></span><br><span class="line"><span class="comment"># 注意有先后顺序，找到了就不再继续找了</span></span><br><span class="line">STATICFILES_FINDERS = (</span><br><span class="line">    <span class="string">"django.contrib.staticfiles.finders.FileSystemFinder"</span>,</span><br><span class="line">    <span class="string">"django.contrib.staticfiles.finders.AppDirectoriesFinder"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>部署时,需要收集静态文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py collectstatic</span><br></pre></td></tr></table></figure>
+<h1 id="uwsgi部署"><a href="#uwsgi部署" class="headerlink" title="uwsgi部署"></a>uwsgi部署</h1><h2 id="0x00-安装uwsgi"><a href="#0x00-安装uwsgi" class="headerlink" title="0x00 安装uwsgi"></a>0x00 安装uwsgi</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python3-dev</span><br><span class="line">sudo pip3 install uwsgi</span><br></pre></td></tr></table></figure>
+<p>安装完成后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --python-version</span><br></pre></td></tr></table></figure>
+<p>版本与要使用的python相同即可</p>
+<h2 id="0x01-配置ini文件"><a href="#0x01-配置ini文件" class="headerlink" title="0x01 配置ini文件"></a>0x01 配置ini文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mysite_uwsgi.ini file</span></span><br><span class="line">[uwsgi]</span><br><span class="line">virtualenv = /home/admin/.virtualenvs/env3 <span class="comment"># Your virtualenv path</span></span><br><span class="line"><span class="comment"># Django-related settings</span></span><br><span class="line"><span class="comment"># the base directory (full path)</span></span><br><span class="line"><span class="built_in">chdir</span>           = /home/admin/myproject <span class="comment"># Your project path</span></span><br><span class="line"><span class="comment"># Django's wsgi file</span></span><br><span class="line">module          = myproject.wsgi <span class="comment"># project's name .wsgi</span></span><br><span class="line"><span class="comment"># the virtualenv (full path)</span></span><br><span class="line"><span class="comment"># home            = /home/admin/.virtualenvs/reload</span></span><br><span class="line"><span class="comment"># process-related settings</span></span><br><span class="line"><span class="comment"># master</span></span><br><span class="line">master          = <span class="literal">true</span></span><br><span class="line"><span class="comment"># maximum number of worker processes</span></span><br><span class="line">processes       = 2</span><br><span class="line"><span class="comment"># the socket (use the full path to be safe)</span></span><br><span class="line">http            = :8080 <span class="comment"># 用于http直接访问</span></span><br><span class="line">socket          = /home/admin/myproject/myproject.sock <span class="comment"># 用于配合nginx</span></span><br><span class="line"><span class="comment"># 或者 socket = ip:端口</span></span><br><span class="line">pidfile = /home/admin/myproject/uwsgi.pid <span class="comment"># 生成pid文件,用于进程管理</span></span><br><span class="line"><span class="comment"># ... with appropriate permissions - may be needed</span></span><br><span class="line"><span class="comment"># chmod-socket    = 664</span></span><br><span class="line"><span class="comment"># clear environment on exit</span></span><br><span class="line">vacuum          = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="0x02-运行uwsgi"><a href="#0x02-运行uwsgi" class="headerlink" title="0x02 运行uwsgi"></a>0x02 运行uwsgi</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini uwsgi.ini</span><br></pre></td></tr></table></figure>
+<h3 id="uwsgi指令"><a href="#uwsgi指令" class="headerlink" title="uwsgi指令"></a>uwsgi指令</h3><p><span style="color:red;">uwsgi -d —ini uwsgi.ini</span> 后台运行uwsgi</p>
+<p><span style="color:red;">uwsgi —reload xxx.pid</span> 重新加载</p>
+<p><span style="color:red;">uwsgi —stop xxx.pid</span> 停止进程</p>
+<h3 id="查看端口占用情况"><a href="#查看端口占用情况" class="headerlink" title="查看端口占用情况"></a>查看端口占用情况</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i  :8000</span><br></pre></td></tr></table></figure>
+<h3 id="查找进程"><a href="#查找进程" class="headerlink" title="查找进程"></a>查找进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep uwsgi</span><br></pre></td></tr></table></figure>
+<h3 id="停止进程"><a href="#停止进程" class="headerlink" title="停止进程"></a>停止进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">kill</span> -9 PID</span><br></pre></td></tr></table></figure>
+<h1 id="nginx部署"><a href="#nginx部署" class="headerlink" title="nginx部署"></a>nginx部署</h1><h2 id="0x00-安装nginx"><a href="#0x00-安装nginx" class="headerlink" title="0x00 安装nginx"></a>0x00 安装nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nginx</span><br></pre></td></tr></table></figure>
+<p>安装后访问ip,显示nginx欢迎页面即说明安装成功</p>
+<h2 id="0x01-新建网站"><a href="#0x01-新建网站" class="headerlink" title="0x01 新建网站"></a>0x01 新建网站</h2><p>首先在项目路径下新建 uwsgi_params 文件,内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">uwsgi_param  QUERY_STRING       $query_string;</span><br><span class="line">uwsgi_param  REQUEST_METHOD     $request_method;</span><br><span class="line">uwsgi_param  CONTENT_TYPE       $content_type;</span><br><span class="line">uwsgi_param  CONTENT_LENGTH     $content_length;</span><br><span class="line"></span><br><span class="line">uwsgi_param  REQUEST_URI        $request_uri;</span><br><span class="line">uwsgi_param  PATH_INFO          $document_uri;</span><br><span class="line">uwsgi_param  DOCUMENT_ROOT      $document_root;</span><br><span class="line">uwsgi_param  SERVER_PROTOCOL    $server_protocol;</span><br><span class="line">uwsgi_param  REQUEST_SCHEME     $scheme;</span><br><span class="line">uwsgi_param  HTTPS              $https if_not_empty;</span><br><span class="line"></span><br><span class="line">uwsgi_param  REMOTE_ADDR        $remote_addr;</span><br><span class="line">uwsgi_param  REMOTE_PORT        $remote_port;</span><br><span class="line">uwsgi_param  SERVER_PORT        $server_port;</span><br><span class="line">uwsgi_param  SERVER_NAME        $server_name;</span><br></pre></td></tr></table></figure>
+<p>之后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/nginx/sites-available/mysite.conf</span><br></pre></td></tr></table></figure>
+<p>写入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># myproject.conf</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># the upstream component nginx needs to connect to</span></span><br><span class="line">upstream django &#123;</span><br><span class="line">    server unix:///home/admin/myproject/myproject.sock; <span class="comment"># for a file socket</span></span><br><span class="line">    <span class="comment"># server 127.0.0.1:8001; # for a web port socket 端口与uwsgi的socket配置相同</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># configuration of the server</span></span><br><span class="line">server &#123;</span><br><span class="line">    <span class="comment"># the port your site will be served on</span></span><br><span class="line">    listen      8000;</span><br><span class="line">    <span class="comment"># the domain name it will serve for</span></span><br><span class="line">    server_name 207.148.123.145; <span class="comment"># substitute your machine's IP address or FQDN</span></span><br><span class="line">    charset     utf-8;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># max upload size</span></span><br><span class="line">    client_max_body_size 75M;   <span class="comment"># adjust to taste</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Django media</span></span><br><span class="line">    <span class="comment"># location /media  &#123;</span></span><br><span class="line">    <span class="comment">#     alias /path/to/your/mysite/media;  # your Django project's media files - amend as required</span></span><br><span class="line">    <span class="comment"># &#125;</span></span><br><span class="line">    </span><br><span class="line">	location /static &#123;</span><br><span class="line">        <span class="built_in">alias</span> /home/admin/myproject/collected_static; <span class="comment"># your Django project's static files - amend as required</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Finally, send all non-media requests to the Django server.</span></span><br><span class="line">    location / &#123;</span><br><span class="line">        uwsgi_pass  django;</span><br><span class="line">        include     /home/admin/myproject/uwsgi_params; <span class="comment"># the uwsgi_params file you installed 与上文写的文件路径相同</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>media和static路径不需要可不写</p>
 
       
     </div>
@@ -464,7 +459,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/Django/" rel="tag"># Django</a>
+          
+            <a href="/tags/uwsgi/" rel="tag"># uwsgi</a>
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
           
         </div>
       
@@ -477,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/12/ctf工具总结/" rel="next" title="ctf工具总结">
-                <i class="fa fa-chevron-left"></i> ctf工具总结
+              <a href="/2019/09/27/htmlcss/" rel="next" title="html&css">
+                <i class="fa fa-chevron-left"></i> html&css
               </a>
             
           </div>
@@ -487,8 +486,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/27/htmlcss/" rel="prev" title="html&css">
-                html&css <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/31/spider/" rel="prev" title="spider">
+                spider <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -621,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#base64库"><span class="nav-number">1.</span> <span class="nav-text">base64库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#base64-b64encode-string"><span class="nav-number">1.1.</span> <span class="nav-text">base64.b64encode(string)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base64-b64decode-string"><span class="nav-number">1.2.</span> <span class="nav-text">base64.b64decode(string)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串处理"><span class="nav-number">2.</span> <span class="nav-text">字符串处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#split"><span class="nav-number">2.1.</span> <span class="nav-text">split()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#strip"><span class="nav-number">2.2.</span> <span class="nav-text">strip()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切片"><span class="nav-number">2.3.</span> <span class="nav-text">切片</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图片处理"><span class="nav-number">3.</span> <span class="nav-text">图片处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-open"><span class="nav-number">3.1.</span> <span class="nav-text">Image.open()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取图片的宽高"><span class="nav-number">3.2.</span> <span class="nav-text">获取图片的宽高</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片原比例缩放"><span class="nav-number">3.3.</span> <span class="nav-text">图片原比例缩放</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#os库"><span class="nav-number">4.</span> <span class="nav-text">os库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GUI学习"><span class="nav-number">5.</span> <span class="nav-text">GUI学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tkinter"><span class="nav-number">5.1.</span> <span class="nav-text">tkinter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tk"><span class="nav-number">5.1.1.</span> <span class="nav-text">Tk()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#title"><span class="nav-number">5.1.2.</span> <span class="nav-text">title</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Button控件"><span class="nav-number">5.1.3.</span> <span class="nav-text">Button控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Label控件"><span class="nav-number">5.1.4.</span> <span class="nav-text">Label控件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#显示文字"><span class="nav-number">5.1.4.1.</span> <span class="nav-text">显示文字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示图片"><span class="nav-number">5.1.4.2.</span> <span class="nav-text">显示图片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Text控件"><span class="nav-number">5.1.5.</span> <span class="nav-text">Text控件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取Text内的文字"><span class="nav-number">5.1.5.1.</span> <span class="nav-text">获取Text内的文字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Text文本内容的修改"><span class="nav-number">5.1.5.2.</span> <span class="nav-text">Text文本内容的修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态修改"><span class="nav-number">5.1.6.</span> <span class="nav-text">动态修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tkinter布局管理"><span class="nav-number">5.1.7.</span> <span class="nav-text">tkinter布局管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pack"><span class="nav-number">5.1.7.1.</span> <span class="nav-text">pack()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#grid"><span class="nav-number">5.1.7.2.</span> <span class="nav-text">grid()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加滚动条"><span class="nav-number">5.1.8.</span> <span class="nav-text">增加滚动条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开文件选取框"><span class="nav-number">5.1.9.</span> <span class="nav-text">打开文件选取框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行窗口"><span class="nav-number">5.1.10.</span> <span class="nav-text">运行窗口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#识别文件的编码格式并打开"><span class="nav-number">6.</span> <span class="nav-text">识别文件的编码格式并打开</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Django环境搭建"><span class="nav-number">1.</span> <span class="nav-text">Django环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-配置虚拟环境"><span class="nav-number">1.1.</span> <span class="nav-text">0x00 配置虚拟环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟环境相关指令"><span class="nav-number">1.1.1.</span> <span class="nav-text">虚拟环境相关指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装Django"><span class="nav-number">1.2.</span> <span class="nav-text">0x01 安装Django</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-新建Django项目"><span class="nav-number">1.3.</span> <span class="nav-text">0x02 新建Django项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-新建app"><span class="nav-number">1.4.</span> <span class="nav-text">0x03 新建app</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-运行开发服务器"><span class="nav-number">1.5.</span> <span class="nav-text">0x04 运行开发服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-静态文件"><span class="nav-number">1.6.</span> <span class="nav-text">0x05 静态文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uwsgi部署"><span class="nav-number">2.</span> <span class="nav-text">uwsgi部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-安装uwsgi"><span class="nav-number">2.1.</span> <span class="nav-text">0x00 安装uwsgi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-配置ini文件"><span class="nav-number">2.2.</span> <span class="nav-text">0x01 配置ini文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-运行uwsgi"><span class="nav-number">2.3.</span> <span class="nav-text">0x02 运行uwsgi</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#uwsgi指令"><span class="nav-number">2.3.1.</span> <span class="nav-text">uwsgi指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看端口占用情况"><span class="nav-number">2.3.2.</span> <span class="nav-text">查看端口占用情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找进程"><span class="nav-number">2.3.3.</span> <span class="nav-text">查找进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#停止进程"><span class="nav-number">2.3.4.</span> <span class="nav-text">停止进程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx部署"><span class="nav-number">3.</span> <span class="nav-text">nginx部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-安装nginx"><span class="nav-number">3.1.</span> <span class="nav-text">0x00 安装nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-新建网站"><span class="nav-number">3.2.</span> <span class="nav-text">0x01 新建网站</span></a></li></ol></li></ol></div>
             
 
           </div>
