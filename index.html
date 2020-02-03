@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://wlupus.github.io/2019/10/31/spider/">
+    <link itemprop="mainEntityOfPage" href="http://wlupus.github.io/2020/02/03/pwn_baby/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wlupus">
@@ -323,7 +323,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/10/31/spider/" itemprop="url">spider</a></h1>
+                <a class="post-title-link" href="/2020/02/03/pwn_baby/" itemprop="url">pwn入门</a></h1>
         
 
         <div class="post-meta">
@@ -335,13 +335,25 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-31T09:18:39+08:00">
-                2019-10-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-03T11:23:42+08:00">
+                2020-02-03
               </time>
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:33:30+08:00">
+                2020-02-03
+              </time>
             
           </span>
 
@@ -396,14 +408,165 @@
 
       
         
-          
-          0x00 爬虫基本架构HTML下载器: 获取新页面内容
-HTML解析器: 解析新内容中的url
-url管理器: 管理url,去重,提供新的url来爬取
-输出器: 将数据收集保存或输出
+          <p>pwn的基础方法</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/03/pwn_baby/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
 
-0x01 爬虫相关库BeautifulSoup12soup = BeautifulSoup(cont, 'html.parser', from_encoding='utf-8') # 创建soup对象links =
-          ...
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://wlupus.github.io/2019/10/31/spider/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wlupus">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlupus">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/31/spider/" itemprop="url">spider</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-31T09:18:39+08:00">
+                2019-10-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:41:00+08:00">
+                2020-02-03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>爬虫的简单架构和实现</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/10/31/spider/#more" rel="contents">
@@ -494,7 +657,19 @@ url管理器: 管理url,去重,提供新的url来爬取
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:37:30+08:00">
+                2020-02-03
+              </time>
             
           </span>
 
@@ -549,12 +724,7 @@ url管理器: 管理url,去重,提供新的url来爬取
 
       
         
-          
-          Django环境搭建以下基于Python3和Django2.2版本,对低版本不具有参考性
-0x00 配置虚拟环境1pip3 install virtualenv virtualenvwrapper
-之后修改环境变量(如.bashrc),加入
-1234export WORKON_HOME=$HOME/.virtualenvsexport PROJECT_HOME=$HOME/workspaceexp
-          ...
+          <p>基于Python3和Django2.2版本的django环境搭建</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/10/30/djangoenv/#more" rel="contents">
@@ -645,7 +815,19 @@ url管理器: 管理url,去重,提供新的url来爬取
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:38:54+08:00">
+                2020-02-03
+              </time>
             
           </span>
 
@@ -700,12 +882,7 @@ url管理器: 管理url,去重,提供新的url来爬取
 
       
         
-          
-          (前端果然是体力活)
-html基础标签&lt;p&gt;这种的是标签,而&lt;p&gt;something&lt;/p&gt;称为元素
-span vs div&lt;div&gt;是block-level的元素，span是inline-level的元素(并不知道汉语应该怎么说，因为被推荐的教程是英文的)
-strong vs em&lt;strong&gt;使内容加粗，&lt;em&gt;使内容斜
-          ...
+          <p>(<del>前端果然是体力活</del>)</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/09/27/htmlcss/#more" rel="contents">
@@ -796,7 +973,19 @@ strong vs em&lt;strong&gt;使内容加粗，&lt;em&gt;使内容斜
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:40:29+08:00">
+                2020-02-03
+              </time>
             
           </span>
 
@@ -851,11 +1040,7 @@ strong vs em&lt;strong&gt;使内容加粗，&lt;em&gt;使内容斜
 
       
         
-          
-          好久没有写博客了，总结一下python写程序时遇到的知识点和问题。
-base64库base64.b64encode(string)接受参数string应为byte型，str类型需转换，如string.encode(‘utf-8’)
-base64.b64decode(string)同上，字符串应为byte型，注意可加参数validate,true表示遇到非法字符抛出异常，false表示遇到非法字符忽
-          ...
+          <p>好久没有写博客了，总结一下python写程序时遇到的知识点和问题。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/09/21/python总结/#more" rel="contents">
@@ -946,7 +1131,19 @@ base64.b64decode(string)同上，字符串应为byte型，注意可加参数vali
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:36:48+08:00">
+                2020-02-03
+              </time>
             
           </span>
 
@@ -979,14 +1176,7 @@ base64.b64decode(string)同上，字符串应为byte型，注意可加参数vali
 
       
         
-          
-          1.ZipCenOp.jar用于判断压缩包是否为伪加密
-
-指令:java -jar ZipCenOp.jar r xxx.zip decodejava -jar ZipCenOp.jar e xxx.zip encode
-
-待续
-
-          
+          <p>关于CTF常用工具的一些总结</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/09/12/ctf工具总结/#more" rel="contents">
@@ -1059,7 +1249,7 @@ base64.b64decode(string)同上，字符串应为byte型，注意可加参数vali
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/11/PHPbug/" itemprop="url">PHP漏洞总结</a></h1>
+                <a class="post-title-link" href="/2019/09/11/PHPbug/" itemprop="url">PHP审计总结</a></h1>
         
 
         <div class="post-meta">
@@ -1077,7 +1267,19 @@ base64.b64decode(string)同上，字符串应为byte型，注意可加参数vali
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:40:08+08:00">
+                2020-02-03
+              </time>
             
           </span>
 
@@ -1110,13 +1312,7 @@ base64.b64decode(string)同上，字符串应为byte型，注意可加参数vali
 
       
         
-          
-           php审计—从入门到入坟 
-extract()
-extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖
-
-效果:1234567&lt;?php$a = "a";$my_array = array("a" =&gt; "Cat","b" =&gt; "Dog", "c"
-          ...
+          <p>php审计的常见漏洞</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/09/11/PHPbug/#more" rel="contents">
@@ -1207,7 +1403,19 @@ extract()函数从数组中将变量导入到当前的符号表。该函数使�
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:38:27+08:00">
+                2020-02-03
+              </time>
             
           </span>
 
@@ -1240,12 +1448,7 @@ extract()函数从数组中将变量导入到当前的符号表。该函数使�
 
       
         
-          
-          FirstBlog终于在自习室搞完了。。。初次尝试hexo,慢慢摸索吧。==zyf sb==yc nbzyf nbyc sb$ \sum_{i=1}^n i^2 $
-
-    \begin{aligned}
-        \vert y_n-A \vert &= \vert \frac{\left(x_1-A \right)+\left(x_2-A\right)+\ldots+\left( x_
-          ...
+          <p>初次尝试hexo</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/09/11/FirstBlog/#more" rel="contents">
@@ -1332,7 +1535,7 @@ extract()函数从数组中将变量导入到当前的符号表。该函数使�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1354,7 +1557,7 @@ extract()函数从数组中将变量导入到当前的符号表。该函数使�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1391,7 +1594,7 @@ extract()函数从数组中将变量导入到当前的符号表。该函数使�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

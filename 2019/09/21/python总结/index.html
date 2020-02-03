@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="好久没有写博客了，总结一下python写程序时遇到的知识点和问题。 base64库base64.b64encode(string)接受参数string应为byte型，str类型需转换，如string.encode(‘utf-8’) base64.b64decode(string)同上，字符串应为byte型，注意可加参数validate,true表示遇到非法字符抛出异常，false表示遇到非法字符忽">
+<meta name="description" content="好久没有写博客了，总结一下python写程序时遇到的知识点和问题。">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python">
 <meta property="og:url" content="http://wlupus.github.io/2019/09/21/python总结/index.html">
 <meta property="og:site_name" content="wlupus">
-<meta property="og:description" content="好久没有写博客了，总结一下python写程序时遇到的知识点和问题。 base64库base64.b64encode(string)接受参数string应为byte型，str类型需转换，如string.encode(‘utf-8’) base64.b64decode(string)同上，字符串应为byte型，注意可加参数validate,true表示遇到非法字符抛出异常，false表示遇到非法字符忽">
+<meta property="og:description" content="好久没有写博客了，总结一下python写程序时遇到的知识点和问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-27T08:26:11.779Z">
+<meta property="og:updated_time" content="2020-02-03T10:40:29.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python">
-<meta name="twitter:description" content="好久没有写博客了，总结一下python写程序时遇到的知识点和问题。 base64库base64.b64encode(string)接受参数string应为byte型，str类型需转换，如string.encode(‘utf-8’) base64.b64decode(string)同上，字符串应为byte型，注意可加参数validate,true表示遇到非法字符抛出异常，false表示遇到非法字符忽">
+<meta name="twitter:description" content="好久没有写博客了，总结一下python写程序时遇到的知识点和问题。">
 
 
 
@@ -340,7 +340,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-03T18:40:29+08:00">
+                2020-02-03
+              </time>
             
           </span>
 
@@ -395,6 +407,7 @@
 
       
         <p>好久没有写博客了，总结一下python写程序时遇到的知识点和问题。</p>
+<a id="more"></a>
 <h1 id="base64库"><a href="#base64库" class="headerlink" title="base64库"></a>base64库</h1><h2 id="base64-b64encode-string"><a href="#base64-b64encode-string" class="headerlink" title="base64.b64encode(string)"></a>base64.b64encode(string)</h2><p>接受参数string应为byte型，str类型需转换，如string.encode(‘utf-8’)</p>
 <h2 id="base64-b64decode-string"><a href="#base64-b64decode-string" class="headerlink" title="base64.b64decode(string)"></a>base64.b64decode(string)</h2><p>同上，字符串应为byte型，注意可加参数validate,true表示遇到非法字符抛出异常，false表示遇到非法字符忽略，默认false。如base64.b64decode(s,validate=True)<br>注意binascii.Error是在base64命名空间下，所以except要写成except base64.binascii.Error</p>
 <blockquote>
@@ -566,7 +579,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -588,7 +601,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -641,7 +654,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
